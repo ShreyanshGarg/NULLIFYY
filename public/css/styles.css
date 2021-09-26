@@ -1,5 +1,5 @@
 
-
+/*---------------------------------- navbar css------------------------ */
 
 .Navbar-sec{
   /* min-width: 980px; */
@@ -90,7 +90,11 @@ span:hover{
 
 
 
-/* Sidebar css */
+/* -----------------------------Sidebar css------------------ */
+
+
+
+
 /* .sidebar {
    position: relative;
    padding-top: 33px;
@@ -240,4 +244,145 @@ a:hover{
        text-align: center;
    }
 
+}
+
+
+/* --------------------Center css--------------------------------- */
+.topbar {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* height: 60px;
+    width: 840px; */
+    position: relative;
+    z-index: 9;
+    background: #eee;
+    padding: 13px 10px 13px 10px;
+    /* margin-bottom: 20px; */
+    border-bottom: 1px solid black;
+}
+
+.dash {
+    margin-left: -50%;
+}
+
+.topbar .actions {
+    position: absolute;
+    top: 13px;
+    right: 50px;
+    display: inline-block;
+}
+
+.topbar .actions>a.btn, .topbar .actions>.btn-group {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.button-exp {
+    /* padding-left: auto;
+    margin-right: 10%; */
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.button-settle {
+    /* margin-right: -200%; */
+    margin-left: 10px;
+    height: 35px;
+    margin-bottom: 10px;
+}
+
+.total-info {
+    background: #eee;
+    padding: 5px 0;
+    font-size: medium;
+    border-bottom: 1px solid black;
+}
+
+.owe-amt {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.owed-amt {
+    color: #398439;
+    font-weight: 500;
+}
+
+.mid-col {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.all-info-heading {
+    font-size: 1.5rem;
+    font-weight: 0;
+}
+
+/* .you-owe {
+    float:left;
+}
+
+.you-are-owed {
+    float:right;
+} */
+
+
+@media  screen and (max-width:520px) {
+    .topbar {
+        height: 100px;
+    }
+
+    .dash {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .topbar .actions {
+        top: 48px;
+        left: 45px;
+    }
+
+    .total-info {
+        font-size: x-small;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .topbar {
+        height: 100px;
+    }
+
+    .dash {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .topbar .actions {
+        top: 48px;
+        left: 30px;
+    }
+
+    .total-info {
+        font-size: x-small;
+    }
+}
+
+@media screen and (max-width:325px) {
+    .topbar {
+        height: 100px;
+    }
+
+    .dash {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .topbar .actions {
+        top: 48px;
+        left: 10px;
+    }
+
+    .total-info {
+        font-size: x-small;
+    }
 }
