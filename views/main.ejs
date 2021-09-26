@@ -1,0 +1,85 @@
+<%- include('partials/header') %>
+
+
+<!-- sectin for navbar -->
+<div class="Navbar-sec">
+  <div class="Navbar-inner">
+    <div class="containeer">
+      <div class="logo">
+        <img class="logo_icon" alt="NULLIFY" src="images\logo.png" >NULLIFY
+      </div>
+      <div class="name-dropdown">
+
+        <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=Tanmay+Jain" />
+        <span>Tanmay Jain</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- section for sidebar -->
+
+
+<div class="sidebar">
+    <div class="s-container">
+        <div class="dashboard">
+            <a href="/dashboard" class="link">
+                <span class="sidebar-heading">Dashboard</span>
+            </a>
+        </div>
+        <div class="groups">
+            <div class="groups-heading">
+                <a href="/groups" class="link">
+                  Groups
+                </a>
+                <button class="add-button"> + Add</button>
+            </div>
+            <ul class="unordered-list">
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 1</li>
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 2</li>
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 3</li>
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 4</li>
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 5</li>
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 6</li>
+                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 7</li>
+            </ul>
+        </div>
+        <div class="friends">
+            <div class="friends-heading">
+                <a href="/friends" class="link">
+                    Friends
+                </a>
+              <!-- <button class="add-button"> + Add</button>  -->
+            </div>
+            <ul class="unordered-list">
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 1</li>
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 2</li>
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 3</li>
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 4</li>
+                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 5</li>
+            </ul>
+        </div>
+        <div class="invite-friend">
+            <div class="sidebar-heading">Invite Friends</div>
+            <div class="sidebar_invites">
+                <input class="invite_email" type="email" placeholder="Enter an email address" />
+                <br />
+                <button class="send_invite">Send invite</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<%- include('partials/footer') %>

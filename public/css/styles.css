@@ -1,0 +1,243 @@
+
+
+
+.Navbar-sec{
+  /* min-width: 980px; */
+  min-height: 8vh;
+  position: relative;
+  background: #48be9d;
+  top: 0
+}
+
+
+.Navbar-inner{
+  font-size: 18px;
+  height: inherit;
+}
+
+.containeer{
+  padding: 12px 57px 9px 78px;
+}
+
+.logo{
+  float: left;
+  height: 6vh;
+}
+
+.logo_icon{
+  height: 38px;
+  width: 40px;
+}
+
+.name-dropdown{
+  height: 6vh;
+  float: right;
+}
+
+span{
+  transition: 0.6s;
+}
+
+span:hover{
+  background: #48be9d;
+  color:#ffffff;
+  cursor: pointer;
+  opacity: 0.7
+}
+
+.name_logo{
+  height: 30px;
+  width: 33px;
+  border-radius: 12px;
+   margin-right: 6px;
+}
+
+@media screen and (max-height:670px){
+  .Navbar-sec{
+    min-height:9vh;
+  }
+}
+
+@media screen and (max-height:450px) {
+
+}
+
+
+@media screen and (max-width: 980px){
+  .Navbar-inner{
+    font-size: 15px;
+    width: auto;
+  }
+
+  .containeer{
+    width: auto;
+    min-width: auto;
+    padding: 9px 23px 0px 69px;
+  }
+
+  /* .name-dropdown {
+    margin-right: auto;
+  } */
+
+  img {
+    height: 23px;
+    width: 30px;
+  }
+
+
+}
+
+
+
+
+/* Sidebar css */
+/* .sidebar {
+   position: relative;
+   padding-top: 33px;
+   margin-left: -120px;
+   padding-right: 20px;
+   width: 350px;
+   z-index: 3;
+   float: left;
+   background-color: #D4ECDD;
+   height: 90vh;
+} */
+
+.s-container {
+   padding: 10px 10px 10px 0;
+}
+
+.dashboard {
+   margin: 11px 0 0;
+   padding: 3px 8px 5px 0px;
+   font-size: 16px;
+   line-height: 21px;
+}
+
+.groups {
+   margin: 30px 0 0;
+   padding: 3px 8px 5px 0px;
+   font-size: 16px;
+   line-height: 21px;
+   text-align: left;
+}
+
+.frnd_grp_img {
+   height: 30px;
+   width: 33px;
+   border-radius: 12px;
+   margin-right: 6px;
+}
+
+.groups-heading {
+   background-color: whitesmoke;
+}
+
+.name {
+   padding-left: 5px;
+}
+
+.link {
+   color: #000000;
+   text-decoration: none;
+   text-align: left;
+}
+
+.friends {
+   margin: 30px 0 0;
+   padding: 3px 8px 5px 0px;
+   font-size: 16px;
+   line-height: 21px;
+   text-align: left;
+}
+
+.add-button {
+   margin-left: 30%;
+   font-size: 14px;
+   border: black;
+   background-color: whitesmoke;
+}
+
+.add-button:hover {
+   color: #48be9d;
+}
+
+.friends-heading {
+   background-color: whitesmoke;
+}
+
+ul{
+   height: 120px;
+   overflow: hidden;
+   overflow-y: scroll;
+   list-style-type: none;
+}
+
+
+.sidebar-heading {
+   background: #5bc5a7;
+   color: #fff;
+   border: 1px solid #39a385;
+   font-weight: bold;
+   font-size: 14px;
+   padding: 3px 5px;
+   margin: 15px 0 0 0px;
+   text-shadow: 0 -1px 0 #3eaf8f;
+}
+
+.sidebar_invites {
+   margin: 0 0 0 0;
+   border: 1px solid #ccc;
+   border-top: none;
+   padding: 5px;
+}
+
+.invite_email {
+   width: 95%;
+   margin: 0 0 5px;
+}
+
+.send_invite {
+   font-size: 12px;
+   padding: 2px 6px;
+   border: none;
+   background-color: #48be9d;
+   color: #fff;
+   font-weight: bold;
+}
+
+a:hover{
+   text-decoration: none;
+}
+
+@media screen and (max-width:430px) {
+   .unordered-list {
+       padding-left: 0;
+   }
+
+   .frnd_grp_img {
+       height: 20px;
+       width: 20px;
+   }
+
+   .grouplist {
+       font-size: 13px;
+   }
+
+   .friendlist {
+       font-size: 13px;
+   }
+
+   .groups-heading {
+       text-align: center;
+   }
+
+   .add-button {
+       margin-left: 6%;
+   }
+
+   .friends-heading {
+       text-align: center;
+   }
+
+}
