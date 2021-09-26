@@ -1,3 +1,17 @@
+/* ------------------------------Main css-------------------------- */
+
+.row{
+  margin-right: 0px;
+   margin-left: 0px;
+   padding-right: calc(var(--bs-gutter-x) * .5);
+padding-left: calc(var(--bs-gutter-x) * .5);
+}
+
+
+
+
+
+
 
 /*---------------------------------- navbar css------------------------ */
 
@@ -116,6 +130,7 @@ span:hover{
    padding: 3px 8px 5px 0px;
    font-size: 16px;
    line-height: 21px;
+   text-align: center;
 }
 
 .groups {
@@ -175,6 +190,7 @@ ul{
    overflow: hidden;
    overflow-y: scroll;
    list-style-type: none;
+   padding-inline-start: 0px;
 }
 
 
@@ -193,7 +209,8 @@ ul{
    margin: 0 0 0 0;
    border: 1px solid #ccc;
    border-top: none;
-   padding: 5px;
+   padding: 10px 5px 10px 5px;
+   text-align:center;
 }
 
 .invite_email {
@@ -261,9 +278,7 @@ a:hover{
     border-bottom: 1px solid black;
 }
 
-.dash {
-    margin-left: -50%;
-}
+
 
 .topbar .actions {
     position: absolute;
