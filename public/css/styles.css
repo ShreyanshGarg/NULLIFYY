@@ -266,8 +266,9 @@ a:hover{
 /* --------------------Center css--------------------------------- */
 .center {
   padding: 0px;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
+  border-left: 1px solid #DCDCDC;
+  border-right: 1px solid #DCDCDC;
+  box-shadow: 0 0 12px rgb(0 0 0 / 20%);
 }
 
 .topbar {
