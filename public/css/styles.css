@@ -2,15 +2,10 @@
 
 .row{
   margin-right: 0px;
-   margin-left: 0px;
-   padding-right: calc(var(--bs-gutter-x) * .5);
-padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-left: 0px;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
 }
-
-
-
-
-
 
 
 /*---------------------------------- navbar css------------------------ */
@@ -106,8 +101,10 @@ span:hover{
 
 /* -----------------------------Sidebar css------------------ */
 
-
-
+.col-lg-2 .col-sm-4 {
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
 
 /* .sidebar {
    position: relative;
@@ -191,6 +188,7 @@ ul{
    overflow-y: scroll;
    list-style-type: none;
    padding-inline-start: 0px;
+   padding-left: 0;
 }
 
 
@@ -203,6 +201,7 @@ ul{
    padding: 3px 5px;
    margin: 15px 0 0 0px;
    text-shadow: 0 -1px 0 #3eaf8f;
+   text-align: center;
 }
 
 .sidebar_invites {
@@ -265,6 +264,12 @@ a:hover{
 
 
 /* --------------------Center css--------------------------------- */
+.center {
+  padding: 0px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
 .topbar {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -278,7 +283,10 @@ a:hover{
     border-bottom: 1px solid black;
 }
 
-
+.dash {
+    margin-left: 10%;
+    font-size: 2rem;
+}
 
 .topbar .actions {
     position: absolute;
@@ -295,14 +303,14 @@ a:hover{
 .button-exp {
     /* padding-left: auto;
     margin-right: 10%; */
-    height: 35px;
+    /* height: 35px; */
     margin-bottom: 10px;
 }
 
 .button-settle {
     /* margin-right: -200%; */
     margin-left: 10px;
-    height: 35px;
+    /* height: 35px; */
     margin-bottom: 10px;
 }
 
@@ -311,6 +319,7 @@ a:hover{
     padding: 5px 0;
     font-size: medium;
     border-bottom: 1px solid black;
+    text-align: center;
 }
 
 .owe-amt {
