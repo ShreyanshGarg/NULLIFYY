@@ -269,6 +269,7 @@ a:hover{
   border-left: 1px solid #DCDCDC;
   border-right: 1px solid #DCDCDC;
   box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+  min-height: 92vh;
 }
 
 .topbar {
