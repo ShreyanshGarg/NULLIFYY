@@ -25,12 +25,13 @@ app.get("/",function(req,res){
   res.render("login.ejs",{danger:"none"});
 }
   else{
-    res.render("login.ejs",{danger:"block"});}
+    msg=0;
+    res.render("login.ejs",{danger:"block"});
+  }
   }
 )
 
 app.post("/dashboard",function(req,res){
-
 if(req.body.button=="signup_page"){
   res.render("main");
 }else{
