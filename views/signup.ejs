@@ -1,24 +1,33 @@
-<form action="/dashboard" method="post" >
-  <div>
-    <label>First Name</label>
-    <input id="firstname" type="var" name="firstName">
+<%- include('partials/header') %>
 
-  </div>
-  <div>
-    <label>Last Name</label>
-    <input id="lastname" type="var" name="lastName">
-  </div>
-  <div>
-    <label>Email Id</label>
-    <input id="emailid" type="email" name="emailId">
-  </div>
-  <div>
-    <label>password</label>
-    <input id="password" type="var" name="password">
-  </div>
-  <div>
-    <label>Phone no</label>
-    <input id="phoneno" type="var" name="phoneNo">
-  </div>
-  <button type="submit" name="button" value="signup_page">Submit</button>
+<form action="/dashboard" method="post">
+  <section class="vh-100 whole">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card bg-dark text-white" style="border-radius: 1rem;">
+            <div class="card-body p-4 text-center">
+
+              <div class="mb-1 md-3 pb-3">
+
+                <h2 class="fw-bold mb-3 text-uppercase">Sign Up</h2>
+
+                <div class="form-outline form-white mb-4 pl-4 pr-4">
+                  <input class="form-control form-control-lg" id="firstname" type="var" name="firstName" placeholder="First Name">
+                </div>
+                <div class="form-outline form-white mb-4 pl-4 pr-4">
+                  <input class="form-control form-control-lg" id="lastname" type="var" name="lastName" placeholder="Last Name">
+                </div>
+                <div class="form-outline form-white mb-4 pl-4 pr-4">
+                  <input class="form-control form-control-lg" id="emailid" type="email" name="emailId" placeholder="Email Id">
+                </div>
+                <div class="form-outline form-white mb-4 pl-4 pr-4">
+                  <input class="form-control form-control-lg" id="password" type="var" name="password" placeholder="Password">
+                </div>
+                <div class="form-outline form-white mb-4 pl-4 pr-4">
+                  <input class="form-control form-control-lg" id="phoneno" type="var" name="phoneNo" placeholder="Phone No">
+                </div>
+                <button class="btn btn-outline-light btn-lg px-5" type="submit" name="button" value="signup_page">Submit</button>
 </form>
+
+<%- include('partials/footer') %>

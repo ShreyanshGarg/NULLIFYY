@@ -36,7 +36,7 @@ if(req.body.button=="signup_page"){
   res.render("main");
 }else{
 
-  if(req.body.username=="titu"){
+  if(req.body.username=="titu@gmail.com"){
     if(req.body.password=="shreyansh"){
       res.render("main");
     }
