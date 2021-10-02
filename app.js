@@ -101,6 +101,7 @@ User.findOne({email:req.body.emailId},function(err,foundduplicate){
       if (err) {
         console.log(err);
       } else {
+        if(foundUser){
         // If user is found
         if (foundUser.password === req.body.password) {
           res.render("main", {
@@ -113,6 +114,12 @@ User.findOne({email:req.body.emailId},function(err,foundduplicate){
           res.redirect("/");
         }
       }
+      else{
+        msg = 1;
+        res.redirect("/");
+        
+      }
+    }
     })
   }
 })
