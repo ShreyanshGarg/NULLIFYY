@@ -1,12 +1,27 @@
-
-
-const express=require("express");
+const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser")
-const app=express();
+const mongoose = require("mongoose");
+const app = express();
 
 
-var msg=0;
+mongoose.connect("mongodb://localhost:27017/profileDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+var msg = 0;
+
+const userSchema = {
+  firstName: String,
+  lastName: String,
+  email: String,
+  password: String,
+  phoneno: Number
+  // favorite_list: [Number]
+};
+
+const User = new mongoose.model('User', userSchema);
 
 
 app.use(express.static("public"));
@@ -16,47 +31,97 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-app.get("/signup",function(req,res){
-  res.render("signup.ejs");
+app.get("/signup", function(req, res) {
+  if(msg===0){
+  res.render("signup.ejs", {
+    danger: "none"
+  });
+}
+else{
+  res.render("signup.ejs", {
+    danger: "block"
+  });
+  msg=0;
+}
 })
 
-app.get("/",function(req,res){
-  if(msg===0){
-  res.render("login.ejs",{danger:"none"});
-}
+app.get("/", function(req, res) {
+  if (msg === 0) {
+    res.render("login.ejs", {
+      danger: "none"
+    });
+  } else {
+    msg = 0;
+    res.render("login.ejs", {
+      danger: "block"
+    });
+  }
+})
+
+app.post("/dashboard", function(req, res) {
+// ***********Signup request***************
+
+  if (req.body.button == "signup_page") {
+
+User.findOne({email:req.body.emailId},function(err,foundduplicate){
+  if(err){
+    console.log(err);
+  }
   else{
-    msg=0;
-    res.render("login.ejs",{danger:"block"});
-  }
-  }
-)
-
-app.post("/dashboard",function(req,res){
-if(req.body.button=="signup_page"){
-  res.render("main");
-}else{
-
-  if(req.body.username=="titu@gmail.com"){
-    if(req.body.password=="shreyansh"){
-      res.render("main");
+    //  If email id Already Exist
+    if(foundduplicate)
+    {
+      msg=1;
+      res.redirect("/signup")
     }
     else{
-      msg=1;
-    res.redirect("/");
+      const user = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.emailId,
+        password: req.body.password,
+        phoneno: req.body.phoneNo
+      })
 
+      user.save();
+      res.render("main", {
+        firstname: req.body.firstName,
+        lastname: req.body.lastName
+      });
     }
-  }else{
-    msg=1;
-    res.redirect("/");
   }
-}
 })
 
-app.post("/main",function(req,res){
+  }
+  // **********Log In request********
+   else {
+    User.findOne({
+      email: req.body.username
+    }, function(err, foundUser) {
+      if (err) {
+        console.log(err);
+      } else {
+        // If user is found
+        if (foundUser.password === req.body.password) {
+          res.render("main", {
+            firstname: foundUser.firstName,
+            lastname: foundUser.lastName
+          });
+        }
+         else {
+          msg = 1;
+          res.redirect("/");
+        }
+      }
+    })
+  }
+})
+
+app.post("/main", function(req, res) {
   res.render("main.ejs");
 })
 
 
-app.listen(3000,function(){
+app.listen(3000, function() {
   console.log("Server Started on 3000");
 })

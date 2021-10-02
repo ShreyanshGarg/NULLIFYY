@@ -21,14 +21,21 @@
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
                   <input class="form-control form-control-lg" id="emailid" type="email" name="emailId" placeholder="Email Id">
                 </div>
+                <div>
+                    <p class="mb-0" style="display:<%=danger%>">**Email Already Exist</p>
+                </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="password" type="var" name="password" placeholder="Password">
+                  <input class="form-control form-control-lg" id="password" type="password" name="password" placeholder="Password">
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
                   <input class="form-control form-control-lg" id="phoneno" type="var" name="phoneNo" placeholder="Phone No">
                 </div>
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" name="button" value="signup_page">Submit</button>
               </div>
+              <div>
+                <p class="mb-0">Already have an account? <a href="/" class="text-white-50 fw-bold">Log In</a></p>
+              </div>
+
             </div>
           </div>
         </div>
