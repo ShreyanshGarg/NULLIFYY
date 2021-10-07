@@ -3,7 +3,8 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const app = express();
-
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 
 mongoose.connect("mongodb://localhost:27017/profileDB", {
   useNewUrlParser: true,
@@ -117,7 +118,7 @@ User.findOne({email:req.body.emailId},function(err,foundduplicate){
       else{
         msg = 1;
         res.redirect("/");
-        
+
       }
     }
     })
@@ -128,6 +129,12 @@ app.post("/main", function(req, res) {
   res.render("main.ejs");
 })
 
+// const dom = new JSDOM(``,{
+//   url: "https://www.google.com"
+// });
+// dom.window.document.addEventListener("click",function(){
+//   console.log("Button clicked");
+// });
 
 app.listen(3000, function() {
   console.log("Server Started on 3000");
