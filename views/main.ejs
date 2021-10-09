@@ -89,7 +89,7 @@
   <div class="topbar">
     <h1 class="dash">Dashboard</h1>
     <div class="actions">
-      <Button class="button-exp btn btn-md btn-danger" onclick="printDiv()">Add an expense</Button>
+      <Button id="exp-btn" class="button-exp btn btn-md btn-danger" onclick="expense()">Add an expense</Button>
       <Button class="button-settle btn btn-md btn-success">Settle up</Button>
     </div>
   </div>
@@ -127,10 +127,15 @@
 </div>
 
 <!-- Modals -->
-<div class="modal" id="exp-modal">
+<div class="modalExp" id="exp-modal">
   <div class="modal-content">
-    <h1>Add an expenses</h1>
-    <div class="close">x</div>
+    <h1 id="modal-h1">Add an expenses</h1>
+    <div class="close" onclick="closeExp()">x</div>
+    <label>With you and:</label>
+    <input type="text" name="friends" placeholder="friend's name"/>
+    <input type="text" name="description" placeholder="Enter a description">
+    <input type="text" name="amount" placeholder="0.00">
+    <button type="submit" name="button" class="btn btn-success btn-large">Save</button>
   </div>
 </div>
 
