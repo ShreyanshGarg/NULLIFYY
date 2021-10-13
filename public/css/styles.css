@@ -459,7 +459,7 @@ a:hover{
 
 .modal-content {
   margin: 15% auto;
-  padding: 20px;
+    padding: 5px 20px 20px 20px;
   border: 1px solid #888;
   width: 40%;
   display: block;
@@ -475,4 +475,10 @@ a:hover{
 .close:hover {
   color: black;
   text-decoration: none;
+}
+
+.modal_heading_custom{
+  display: flex;
+justify-content: space-between;
+
 }
