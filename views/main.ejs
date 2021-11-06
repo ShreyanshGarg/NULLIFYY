@@ -33,7 +33,7 @@
 <div class="sidebar">
     <div class="s-container">
         <div class="dashboard">
-            <a href="/dashboard" class="link">
+            <a href="/main.ejs" class="link">
                 <span class="sidebar-heading">Dashboard</span>
             </a>
         </div>
@@ -130,14 +130,32 @@
 <div class="modalExp" id="exp-modal">
   <div class="modal-content">
     <div class="modal_heading_custom">
-    <h1 id="modal-h1">Add an expenses</h1>
-    <div class="close" onclick="closeExp()">x</div>
+      <h1 id="modal-h1">Add an expense</h1>
+      <div class="closeBtn" onclick="closeExp()">x</div>
     </div>
-    <label>With you and:</label>
-    <input type="text" name="friends" placeholder="friend's name"/>
-    <input type="text" name="description" placeholder="Enter a description">
-    <input type="text" name="amount" placeholder="0.00">
-    <button type="submit" name="button" class="btn btn-success btn-large">Save</button>
+    <div class="modal_content_custom">
+      <label>With you and:</label>
+      <input type="text" name="friends" placeholder="friend's name"/>
+      <input type="text" name="description" placeholder="Enter a description">
+      <input type="text" name="amount" placeholder="0.00">
+      <button type="submit" name="button" class="btn btn-success btn-large">Save</button>
+    </div>
+  </div>
+</div>
+
+<div class="modalFriends" id="friends-modal">
+  <div class="modal-content">
+    <div class="modal_heading_custom">
+      <h1 id="modal-h1">Friend list</h1>
+      <div class="closeBtn" onclick="closeFriend()">x</div>
+    </div>
+    <div class="modal_content_custom">
+      <% friendList.forEach((friend) => { %>
+        <input type="checkbox" value="<%= friend %>">
+        <label><%= friend %></label>
+      <% }); %>
+      <button type="submit" name="friend" class="btn btn-success btn-large" onclick="addFriend()">Next</button>
+    </div>
   </div>
 </div>
 

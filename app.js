@@ -18,8 +18,8 @@ const userSchema = {
   lastName: String,
   email: String,
   password: String,
-  phoneno: Number
-  // favorite_list: [Number]
+  phoneno: Number,
+  friends: [String]
 };
 
 const User = new mongoose.model('User', userSchema);
@@ -81,13 +81,15 @@ User.findOne({email:req.body.emailId},function(err,foundduplicate){
         lastName: req.body.lastName,
         email: req.body.emailId,
         password: req.body.password,
-        phoneno: req.body.phoneNo
+        phoneno: req.body.phoneNo,
+        friends: ["Titu","Golu"]
       })
-
+      var friends =  ["Titu","Golu"];
       user.save();
       res.render("main", {
         firstname: req.body.firstName,
-        lastname: req.body.lastName
+        lastname: req.body.lastName,
+        friendList: friends
       });
     }
   }
@@ -107,7 +109,8 @@ User.findOne({email:req.body.emailId},function(err,foundduplicate){
         if (foundUser.password === req.body.password) {
           res.render("main", {
             firstname: foundUser.firstName,
-            lastname: foundUser.lastName
+            lastname: foundUser.lastName,
+            friendList: foundUser.friends
           });
         }
          else {

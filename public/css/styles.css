@@ -441,14 +441,13 @@ a:hover{
     }
 }
 
-/* --------------------Modals css--------------------------------- */
+/* --------------------------Modals css----------------------------- */
 .modalExp {
   display: none;
   z-index:1;
   position: fixed;
   width:100%;
   height:100%;
-  background-color: rgba(0 0 0 0.3);
   left: 0;
   top:0;
 }
@@ -459,26 +458,45 @@ a:hover{
 
 .modal-content {
   margin: 15% auto;
-    padding: 5px 20px 20px 20px;
+    /* padding: 5px 20px 20px 20px; */
   border: 1px solid #888;
   width: 40%;
   display: block;
 }
 
-.close {
+.closeBtn {
+  color: black;
   width: max-content;
   float: right;
   font-size: 25px;
   font-weight: bold;
+  /* line-height: 0; */
 }
 
-.close:hover {
-  color: black;
+.closeBtn:hover {
+  color: #888;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .modal_heading_custom{
   display: flex;
-justify-content: space-between;
+  justify-content: space-between;
+  background: #48be9d;
+  padding: 5px 20px 0px 20px;
+  border-bottom: 1px solid black;
+}
 
+.modal_content_custom {
+  padding: 10px;
+}
+
+.modalFriends{
+  display: none;
+  z-index:1;
+  position: fixed;
+  width:100%;
+  height:100%;
+  left: 0;
+  top:0;
 }
