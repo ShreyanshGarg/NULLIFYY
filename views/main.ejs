@@ -8,19 +8,19 @@
   <div class="Navbar-inner">
     <div class="containeer">
       <div class="logo">
-        <img class="logo_icon" alt="NULLIFY" src="images\logo.png" >NULLIFY
+        <img class="logo_icon" alt="NULLIFY" src="images\logo.png">NULLIFY
       </div>
       <div class="dropdown">
-      <div class="name-dropdown">
+        <div class="name-dropdown">
 
-        <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=<%=firstname%>+<%=lastname%>" />
+          <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=<%=firstname%>+<%=lastname%>" />
 
-        <span><%=firstname%> <%=lastname%></span>
-        <div class="dropdown-content">
-  <a href="#">Profile</a>
-  <a href="/">Log Out</a>
-</div>
-</div>
+          <span><%=firstname%> <%=lastname%></span>
+          <div class="dropdown-content">
+            <a href="#">Profile</a>
+            <a href="/">Log Out</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -29,104 +29,135 @@
 
 <!-- section for sidebar -->
 <div class="row">
-<div class="col-lg-2 col-sm-4">
-<div class="sidebar">
-    <div class="s-container">
+  <div class="col-lg-2 col-sm-4">
+    <div class="sidebar">
+      <div class="s-container">
         <div class="dashboard">
-            <a href="/main.ejs" class="link">
-                <span class="sidebar-heading">Dashboard</span>
-            </a>
+          <a href="/main.ejs" class="link">
+            <span class="sidebar-heading">Dashboard</span>
+          </a>
         </div>
         <div class="groups">
-            <div class="groups-heading">
-                <a href="/groups" class="link">
-                  Groups
-                </a>
-                <button class="add-button"> + Add</button>
-            </div>
-            <ul class="unordered-list">
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 1</li>
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 2</li>
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 3</li>
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 4</li>
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 5</li>
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 6</li>
-                <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 7</li>
-            </ul>
+          <div class="groups-heading">
+            <a href="/groups" class="link">
+              Groups
+            </a>
+            <button class="add-button"> + Add</button>
+          </div>
+          <ul class="unordered-list">
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 1</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 2</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 3</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 4</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 5</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 6</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 7</li>
+          </ul>
         </div>
         <div class="friends">
-            <div class="friends-heading">
-                <a href="/friends" class="link">
-                    Friends
-                </a>
-              <!-- <button class="add-button"> + Add</button>  -->
-            </div>
-            <ul class="unordered-list">
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 1</li>
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 2</li>
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 3</li>
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 4</li>
-                <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 5</li>
-            </ul>
+          <div class="friends-heading">
+            <a href="/friends" class="link">
+              Friends
+            </a>
+            <!-- <button class="add-button"> + Add</button>  -->
+          </div>
+          <ul class="unordered-list">
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 1</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 2</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 3</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 4</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 5</li>
+          </ul>
         </div>
         <div class="invite-friend">
-            <div class="sidebar-heading">Invite Friends</div>
-            <div class="sidebar_invites">
-                <input class="invite_email" type="email" placeholder="Enter an email address" />
-                <br />
-                <button class="send_invite">Send invite</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-<!-- Center Part -->
-<div class="col-lg-8 col-sm-8 center">
-<div  class="top">
-  <div class="topbar">
-    <h1 class="dash">Dashboard</h1>
-    <div class="actions">
-      <Button id="exp-btn" class="button-exp btn btn-md btn-danger" onclick="expense()">Add an expense</Button>
-      <Button class="button-settle btn btn-md btn-success">Settle up</Button>
-    </div>
-  </div>
-
-  <div class="total-info">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          you owe
-          <br />
-          <div class="owe-amt">Rs 0.00</div>
-        </div>
-        <div class="col mid-col">
-          total balance
-          <br />
-          <div>Rs 0.00</div>
-        </div>
-        <div class="col">
-          you are owed
-          <br />
-          <div class="owed-amt">Rs 0.00</div>
+          <div class="sidebar-heading">Invite Friends</div>
+          <div class="sidebar_invites">
+            <input class="invite_email" type="email" placeholder="Enter an email address" />
+            <br />
+            <button class="send_invite">Send invite</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="all-info">
-    <div class="all-info-heading">
-      <h2 class="you-owe">YOU OWE</h2>
-      <h2 class="you-are-owed">YOU ARE OWED</h2>
+  <!-- Center Part -->
+  <div class="col-lg-8 col-sm-8 center">
+    <div class="top">
+      <div class="topbar">
+        <h1 class="dash">Dashboard</h1>
+        <div class="actions">
+          <Button id="exp-btn" class="button-exp btn btn-md btn-danger" onclick="expense()">Add an expense</Button>
+          <Button class="button-settle btn btn-md btn-success">Settle up</Button>
+        </div>
+      </div>
+
+      <div class="total-info">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              you owe
+              <br />
+              <div class="owe-amt">Rs 0.00</div>
+            </div>
+            <div class="col mid-col">
+              total balance
+              <br />
+              <div>Rs 0.00</div>
+            </div>
+            <div class="col">
+              you are owed
+              <br />
+              <div class="owed-amt">Rs 0.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="all-info">
+        <div class="all-info-heading">
+          <h2 class="you-owe">YOU OWE</h2>
+          <h2 class="you-are-owed">YOU ARE OWED</h2>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-</div>
-</div>
 
 <!-- Modals -->
+
+<!-- friend list modal -->
+<div class="modalFriends" id="friends-modal">
+  <div class="modal-content">
+    <div class="modal_heading_custom">
+      <h1 id="modal-h1">Friend list</h1>
+      <div class="closeBtn" onclick="closeFriend()">x</div>
+    </div>
+    <div class="modal_content_custom">
+      <div id="selection_area">
+        <% friendList.forEach((friend) => { %>
+        <input type="checkbox" id="friend_list" value="<%= friend %>" name="friends_list">
+        <label><%= friend %></label>
+        <br>
+        <% }); %>
+        <br>
+      </div>
+      <div class="select_all" style="float:right">
+        <input type="checkbox" value="ALL" id="all">
+        <label>Select all friend</label>
+        <br>
+      </div>
+
+      <button type="submit" name="friend" class="btn btn-success btn-large" onclick="addFriend()">Next</button>
+      <p id="warning_frnd" style="display:none">*Select atleast one friend</p>
+    </div>
+  </div>
+</div>
+
+<!-- Expense Adding modal -->
+
 <div class="modalExp" id="exp-modal">
   <div class="modal-content">
     <div class="modal_heading_custom">
@@ -135,28 +166,16 @@
     </div>
     <div class="modal_content_custom">
       <label>With you and:</label>
-      <input type="text" name="friends" placeholder="friend's name"/>
+      <input type="text" name="friends" readonly id="frnd_names" placeholder="friend's name" value="shreyansh" />
+      <br>
       <input type="text" name="description" placeholder="Enter a description">
+      <br>
       <input type="text" name="amount" placeholder="0.00">
+      <br>
       <button type="submit" name="button" class="btn btn-success btn-large">Save</button>
     </div>
   </div>
 </div>
 
-<div class="modalFriends" id="friends-modal">
-  <div class="modal-content">
-    <div class="modal_heading_custom">
-      <h1 id="modal-h1">Friend list</h1>
-      <div class="closeBtn" onclick="closeFriend()">x</div>
-    </div>
-    <div class="modal_content_custom">
-      <% friendList.forEach((friend) => { %>
-        <input type="checkbox" value="<%= friend %>">
-        <label><%= friend %></label>
-      <% }); %>
-      <button type="submit" name="friend" class="btn btn-success btn-large" onclick="addFriend()">Next</button>
-    </div>
-  </div>
-</div>
 
 <%- include('partials/footer') %>
