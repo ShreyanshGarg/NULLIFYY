@@ -132,6 +132,15 @@ app.post("/main", function(req, res) {
   res.render("main.ejs");
 })
 
+app.post("/temp", function(req, res) {
+  console.log(req.body.friends);
+  res.render("main", {
+    firstname: "shreyansh",
+    lastname: "garg",
+    friendList: ["titu","golu"]
+  });
+})
+
 // const dom = new JSDOM(``,{
 //   url: "https://www.google.com"
 // });

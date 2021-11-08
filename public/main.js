@@ -6,8 +6,9 @@ function expense() {
 
 let list = [];
 
-function addFriend(divName) {
+// function for adding expense
 
+function addFriend() {
   // code for retrieving values from of selected friend
   var checkboxes = document.getElementsByName('friends_list');
   for (var checkbox of checkboxes) {
@@ -25,6 +26,9 @@ function addFriend(divName) {
     var modalFriends = document.getElementById("friends-modal");
     modalExp.style.display = "block";
     modalFriends.style.display = "none";
+
+    document.getElementById("frnd_names").placeholder=list;
+
     var ll = list.length;
     ll = ll - 1;
     if (ll >= 1) {
@@ -32,9 +36,14 @@ function addFriend(divName) {
     } else {
       document.getElementById("frnd_names").value = list[0];
     }
+// **setting value of place holder**
+    document.getElementById("")
   }
 }
 
+function changeinValue(){
+  document.getElementById("frnd_names").value = list;
+}
 
 function closeExp() {
   var modalExp = document.getElementById("exp-modal");
