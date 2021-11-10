@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
 
-<form action="/dashboard" method="post">
+<form action="/register" method="post">
   <section class="vh-100 whole">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
@@ -19,7 +19,7 @@
                   <input class="form-control form-control-lg" id="lastname" type="var" name="lastName" placeholder="Last Name">
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="emailid" type="email" name="emailId" placeholder="Email Id">
+                  <input class="form-control form-control-lg" id="emailid" type="email" name="username" placeholder="Email Id">
                 </div>
                 <div>
                     <p class="mb-0" style="display:<%=danger%>">**Email Already Exist</p>

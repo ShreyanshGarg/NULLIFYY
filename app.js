@@ -77,10 +77,61 @@ app.get("/", function(req, res) {
   }
 })
 
-app.post("/dashboard", function(req, res) {
+app.get("/dashboard", function(req, res) {
+  if(req.isAuthenticated()){
+    //req.user gives access to the info of authenticated user
+    res.render("main",{firstname: req.user.firstName,lastname: req.user.lastName, friendList: req.user.friends});
+  } else {
+    // authentication fails
+    res.render("login",{danger:"none"});
+  }
+})
+
+app.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+})
+
+// ***********Signup request***************
+app.post("/register", function(req, res) {
+  User.register({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.username,
+            phoneno: req.body.phoneNo,
+            friends: []
+  },req.body.password, function(err,user){
+      if(err){
+        console.log(err);
+        // msg=1 for email already exists
+        msg=1;
+        res.redirect("/signup");
+      } else {
+        console.log(user);
+        passport.authenticate("local")(req, res, function(){
+          res.redirect("/dashboard");
+        });
+      }
+  });
+});
+
+// **********Log In request********
+app.post("/login", function(req, res, next) {
+
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) {msg=1; return res.redirect('/'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect("/dashboard");
+    });
+  })(req, res, next);
+})
+
+// app.post("/dashboard", function(req, res) {
 // ***********Signup request***************
 
-  if (req.body.button == "signup_page") {
+  // if (req.body.button == "signup_page") {
 
 // User.findOne({email:req.body.emailId},function(err,foundduplicate){
 //   if(err){
@@ -113,53 +164,54 @@ app.post("/dashboard", function(req, res) {
 //   }
 // })
 
-User.register({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          username: req.body.emailId,
-          phoneno: req.body.phoneNo,
-          friends: []
-},req.body.password,function(err,user){
-    if(err){
-      console.log(err);
-    }console.log(user);        
-    passport.authenticate("local")(req, res, function(){
-            res.redirect("/");
-        });
-})
-
-  }
+// User.register({
+//           firstName: req.body.firstName,
+//           lastName: req.body.lastName,
+//           username: req.body.emailId,
+//           phoneno: req.body.phoneNo,
+//           friends: []
+// },req.body.password,function(err,user){
+//     if(err){
+//       console.log(err);
+//     }console.log(user);
+//     passport.authenticate("local")(req, res, function(){
+//       console.log("Hello");
+//             res.redirect("/dashboard");
+//         });
+// })
+//
+//   }
   // **********Log In request********
-   else {
-    User.findOne({
-      email: req.body.username
-    }, function(err, foundUser) {
-      if (err) {
-        console.log(err);
-      } else {
-        if(foundUser){
-        // If user is found
-        if (foundUser.password === req.body.password) {
-          res.render("main", {
-            firstname: foundUser.firstName,
-            lastname: foundUser.lastName,
-            friendList: foundUser.friends
-          });
-        }
-         else {
-          msg = 1;
-          res.redirect("/");
-        }
-      }
-      else{
-        msg = 1;
-        res.redirect("/");
-
-      }
-    }
-    })
-  }
-})
+//    else {
+//     User.findOne({
+//       email: req.body.username
+//     }, function(err, foundUser) {
+//       if (err) {
+//         console.log(err);
+//       } else {
+//         if(foundUser){
+//         // If user is found
+//         if (foundUser.password === req.body.password) {
+//           res.render("main", {
+//             firstname: foundUser.firstName,
+//             lastname: foundUser.lastName,
+//             friendList: foundUser.friends
+//           });
+//         }
+//          else {
+//           msg = 1;
+//           res.redirect("/");
+//         }
+//       }
+//       else{
+//         msg = 1;
+//         res.redirect("/");
+//
+//       }
+//     }
+//     })
+//   }
+// })
 
 app.post("/main", function(req, res) {
   res.render("main.ejs");
@@ -173,6 +225,7 @@ app.post("/temp", function(req, res) {
     friendList: ["titu","golu"]
   });
 })
+
 app.post("/invite", function(req, res) {
   console.log(req.body.invited_frnd);
 
