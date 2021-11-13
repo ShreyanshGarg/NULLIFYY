@@ -229,18 +229,32 @@ app.post("/temp", function(req, res) {
 app.post("/invite", function(req, res) {
   console.log(req.body.invited_frnd);
 
-User.findOne({email:req.body.invited_frnd},function(err,result){
+User.findOne({username:req.body.invited_frnd},function(err,result){
   if(err){console.log(err)}
   else{
+    if(req.isAuthenticated()){
 
+      if(!result){
+        console.log("user not found");
+      }else{
+        console.log("user found");
+        User.updateOne({_id:req.user._id},{"$push":{friends:req.body.invited_frnd}},function(err){
+          if(err){console.log(err)}
+        })
+        User.updateOne({_id:result._id},{"$push":{friends:req.user.username}},function(err){
+          if(err){console.log(err)}
+        })
+        res.redirect("/dashboard")
+      }
+
+
+    } else {
+      res.render("login",{danger:"none"});
+    }
   }
 })
 
-  res.render("main", {
-    firstname: "shreyansh",
-    lastname: "garg",
-    friendList: ["titu","golu"]
-  });
+
 })
 
 // const dom = new JSDOM(``,{

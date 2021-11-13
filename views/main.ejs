@@ -62,13 +62,16 @@
             <!-- <button class="add-button"> + Add</button>  -->
           </div>
           <ul class="unordered-list">
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
+              <% friendList.forEach((friend) => { %>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend %></li>
+                        <% }); %>
+            <!-- <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 1</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 2</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 3</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 4</li>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 5</li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 5</li> -->
           </ul>
         </div>
         <div class="invite-friend">
