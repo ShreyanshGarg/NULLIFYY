@@ -13,22 +13,22 @@
                 <h2 class="fw-bold mb-3 text-uppercase">Sign Up</h2>
 
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="firstname" type="var" name="firstName" placeholder="First Name">
+                  <input class="form-control form-control-lg" id="firstname" type="var" name="firstName" placeholder="First Name" required>
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="lastname" type="var" name="lastName" placeholder="Last Name">
+                  <input class="form-control form-control-lg" id="lastname" type="var" name="lastName" placeholder="Last Name" required>
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="emailid" type="email" name="username" placeholder="Email Id">
+                  <input class="form-control form-control-lg" id="emailid" type="email" name="username" placeholder="Email Id" required>
                 </div>
                 <div>
                     <p class="mb-0" style="display:<%=danger%>">**Email Already Exist</p>
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="password" type="password" name="password" placeholder="Password">
+                  <input class="form-control form-control-lg" id="password" type="password" name="password" placeholder="Password" required>
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="phoneno" type="var" name="phoneNo" placeholder="Phone No">
+                  <input class="form-control form-control-lg" id="phoneno" type="number" name="phoneNo" placeholder="Phone No" required>
                 </div>
                 <button class="btn btn-outline-light btn-lg px-5" type="submit" name="button" value="signup_page">Submit</button>
               </div>
