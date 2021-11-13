@@ -83,8 +83,12 @@ app.get("/", function(req, res) {
 app.get("/dashboard",function(req, res) {
   if(req.isAuthenticated()){
     //req.user gives access to the info of authenticated user
-    var passedVariable = req.query.a;
-    console.log(passedVariable);
+var passedVariable = req.query.valid;
+if(passedVariable)
+console.log(passedVariable);
+else
+console.log("passedVariable");
+
     res.render("main",{firstname: req.user.firstName,lastname: req.user.lastName, friendList: req.user.friends});
   } else {
     // authentication fails
@@ -250,15 +254,18 @@ User.findOne({username:req.body.invited_frnd},function(err,result){
           if(err){console.log(err)}
         })
 
+        var string = encodeURIComponent('something that would break');
+        res.redirect('/dashboard?valid=' + string);
 
-        res.redirect(url.format({
-               pathname:"/dashboard",
-               query: {
-                  "a": 1
-                  // "b": 2,
-                  // "valid":"your string here"
-                }
-             }));
+
+        // res.redirect(url.format({
+        //        pathname:"/dashboard",
+        //        query: {
+        //           "a": 1,
+        //           "b": 2,
+        //           "valid":"shreyansh"
+        //         }
+        //      }));
 
 
         // res.redirect("/dashboard",true);
