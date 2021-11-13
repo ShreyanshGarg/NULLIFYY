@@ -63,7 +63,8 @@
           </div>
           <ul class="unordered-list">
               <% friendList.forEach((friend) => { %>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend %></li>
+              <%  var splitedUsername = friend.split("@"); %>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= splitedUsername[0] %></li>
                         <% }); %>
             <!-- <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
