@@ -1,12 +1,15 @@
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
+var url = require('url');
 const passportLocalMongoose = require("passport-local-mongoose");
 
 const ejs = require("ejs");
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const app = express();
+
+var m=false;
 
 app.use(express.static("public"));
 app.set('view engine', 'ejs');
@@ -77,9 +80,11 @@ app.get("/", function(req, res) {
   }
 })
 
-app.get("/dashboard", function(req, res) {
+app.get("/dashboard",function(req, res) {
   if(req.isAuthenticated()){
     //req.user gives access to the info of authenticated user
+    var passedVariable = req.query.a;
+    console.log(passedVariable);
     res.render("main",{firstname: req.user.firstName,lastname: req.user.lastName, friendList: req.user.friends});
   } else {
     // authentication fails
@@ -244,7 +249,19 @@ User.findOne({username:req.body.invited_frnd},function(err,result){
         User.updateOne({_id:result._id},{"$push":{friends:req.user.username}},function(err){
           if(err){console.log(err)}
         })
-        res.redirect("/dashboard")
+
+
+        res.redirect(url.format({
+               pathname:"/dashboard",
+               query: {
+                  "a": 1
+                  // "b": 2,
+                  // "valid":"your string here"
+                }
+             }));
+
+
+        // res.redirect("/dashboard",true);
       }
 
 
