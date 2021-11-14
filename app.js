@@ -36,6 +36,7 @@ var msg = 0;
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
+  email: String,
   username: String,
   password: String,
   phoneno: Number,
@@ -54,16 +55,25 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.get("/signup", function(req, res) {
-  if(msg===0){
+  if(msg===1){
   res.render("signup.ejs", {
-    danger: "none"
+    danger1: "block",
+    danger2: "none"
   });
+  msg=0;
+}
+else if(msg===2){
+  res.render("signup", {
+    danger1: "none",
+    danger2: "block"
+  });
+  msg=0;
 }
 else{
   res.render("signup.ejs", {
-    danger: "block"
+    danger1: "none",
+    danger2: "none"
   });
-  msg=0;
 }
 })
 
@@ -103,25 +113,37 @@ app.get("/logout", function(req, res) {
 
 // ***********Signup request***************
 app.post("/register", function(req, res) {
-  User.register({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            username: req.body.username,
-            phoneno: req.body.phoneNo,
-            friends: []
-  },req.body.password, function(err,user){
-      if(err){
-        console.log(err);
-        // msg=1 for email already exists
+  User.findOne({email: req.body.email},function(err,foundDuplicate) {
+    if(err){
+      console.log(err);
+    } else {
+      if(foundDuplicate){
         msg=1;
         res.redirect("/signup");
       } else {
-        console.log(user);
-        passport.authenticate("local")(req, res, function(){
-          res.redirect("/dashboard");
+        User.register({
+                  firstName: req.body.firstName,
+                  lastName: req.body.lastName,
+                  email: req.body.email,
+                  username: req.body.username,
+                  phoneno: req.body.phoneNo,
+                  friends: []
+        },req.body.password, function(err,user){
+            if(err){
+              console.log(err);
+              // msg=1 for username already exists
+              msg=2;
+              res.redirect("/signup");
+            } else {
+              console.log(user);
+              passport.authenticate("local")(req, res, function(){
+                res.redirect("/dashboard");
+              });
+            }
         });
       }
-  });
+    }
+  })
 });
 
 // **********Log In request********

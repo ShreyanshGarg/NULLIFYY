@@ -63,8 +63,7 @@
           </div>
           <ul class="unordered-list">
               <% friendList.forEach((friend) => { %>
-              <%  var splitedUsername = friend.split("@"); %>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= splitedUsername[0] %></li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend %></li>
                         <% }); %>
             <!-- <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
@@ -80,7 +79,7 @@
           <form class="" action="/invite" method="post">
 
           <div class="sidebar_invites">
-            <input class="invite_email" type="email" placeholder="Enter an email address" name="invited_frnd"/>
+            <input class="invite_email" type="text" placeholder="Enter the username" name="invited_frnd"/>
             <br />
             <button class="send_invite" type="submit">Send invite</button>
           </div>
@@ -124,9 +123,13 @@
       </div>
 
       <div class="all-info">
-        <div class="all-info-heading">
-          <h2 class="you-owe">YOU OWE</h2>
-          <h2 class="you-are-owed">YOU ARE OWED</h2>
+        <div class="all-info-heading row">
+          <div class="col you-owe"><h4>YOU OWE</h4></div>
+          <div class="col you-are-owed"><h4>YOU ARE OWED</h4></div>
+        </div>
+        <div class="list">
+            <div class="positives"></div>
+            <div class="negatives"></div>
         </div>
       </div>
     </div>

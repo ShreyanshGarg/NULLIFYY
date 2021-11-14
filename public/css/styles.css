@@ -3,6 +3,11 @@
   background: #48be9d;
 }
 
+/*-------------------------Signup Page------------------------------*/
+.err {
+  color: red;
+}
+
 /* ------------------------------Main css-------------------------- */
 .row {
   margin-right: 0px;
@@ -201,7 +206,7 @@ span:hover {
 }
 
 ul {
-  height: 120px;
+  max-height: 120px;
   overflow: hidden;
   overflow-y: scroll;
   list-style-type: none;
@@ -278,7 +283,7 @@ a:hover {
   }
 }
 
-/* --------------------Center css--------------------------------- */
+/* --------------------Center Top css---------------------------- */
 .center {
   padding: 0px;
   border-left: 1px solid #DCDCDC;
@@ -424,6 +429,16 @@ a:hover {
   .total-info {
     font-size: x-small;
   }
+}
+/*---------------------------Center Middle CSS-----------------------*/
+.all-info-heading{
+  text-align: center;
+  padding-top: 10px;
+  color: #999;
+}
+
+.you-owe{
+  border-right:1px solid black;
 }
 
 /* --------------------------Modals css----------------------------- */

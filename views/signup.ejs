@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <form action="/register" method="post">
-  <section class="vh-100 whole">
+  <section class="whole">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -19,10 +19,10 @@
                   <input class="form-control form-control-lg" id="lastname" type="var" name="lastName" placeholder="Last Name" required>
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
-                  <input class="form-control form-control-lg" id="emailid" type="email" name="username" placeholder="Email Id" required>
+                  <input class="form-control form-control-lg" id="emailid" type="email" name="email" placeholder="Email Id" required>
                 </div>
-                <div>
-                    <p class="mb-0" style="display:<%=danger%>">**Email Already Exist</p>
+                <div class="form-outline form-white mb-4 pl-4 pr-4">
+                  <input class="form-control form-control-lg" id="username" type="text" name="username" placeholder="Username" required>
                 </div>
                 <div class="form-outline form-white mb-4 pl-4 pr-4">
                   <input class="form-control form-control-lg" id="password" type="password" name="password" placeholder="Password" required>
@@ -35,7 +35,12 @@
               <div>
                 <p class="mb-0">Already have an account? <a href="/" class="text-white-50 fw-bold">Log In</a></p>
               </div>
-
+              <div>
+                  <p class="mb-0 err" style="display:<%=danger1%>">Email Already Exist</p>
+              </div>
+              <div>
+                  <p class="mb-0 err" style="display:<%=danger2%>">Username Already Exist</p>
+              </div>
             </div>
           </div>
         </div>
