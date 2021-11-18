@@ -8,6 +8,10 @@
   color: red;
 }
 
+.hg {
+  min-height: 753px;
+}
+
 /* ------------------------------Main css-------------------------- */
 .row {
   margin-right: 0px;
@@ -248,7 +252,10 @@ ul {
   font-weight: bold;
 }
 
-
+.error {
+  margin-bottom: 0;
+  color: red;
+}
 
 a:hover {
   text-decoration: none;
