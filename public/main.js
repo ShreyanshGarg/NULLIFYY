@@ -11,6 +11,7 @@ let list = [];
 function addFriend() {
   // code for retrieving values from of selected friend
   var checkboxes = document.getElementsByName('friends_list');
+  list = [];
   for (var checkbox of checkboxes) {
     if (checkbox.checked) {
       // inserting friends in an array for further use
