@@ -126,6 +126,7 @@ app.get("/dashboard", function(req, res) {
 
 app.get("/logout", function(req, res) {
   req.logout();
+  console.log("logged out");
   res.redirect("/");
 })
 

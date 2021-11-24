@@ -27,19 +27,30 @@ function addFriend() {
     modalExp.style.display = "block";
     modalFriends.style.display = "none";
 
-    document.getElementById("frnd_names").placeholder=list;
-
     var ll = list.length;
     ll = ll - 1;
-    if (ll >= 1) {
-      document.getElementById("frnd_names").value = list[0] + " and " + ll + " more ";
-    } else {
-      document.getElementById("frnd_names").value = list[0];
-    }
+
+    list.forEach((friend,i)=>{
+
+     document.getElementById(i).textContent=friend;
+     document.getElementById(i).style.display="block";
+         console.log(document.getElementById("input"+i));
+     document.getElementById("input"+i).style.display="block";
+
+    })
+
+    //
+    //
+    // if (ll >= 1) {
+    //   document.getElementById("frnd_names").value = list[0] + " and " + ll + " more ";
+    // } else {
+    //   document.getElementById("frnd_names").value = list[0];
+    // }
 // **setting value of place holder**
     document.getElementById("")
   }
 }
+
 
 function changeinValue(){
   document.getElementById("frnd_names").value = list;

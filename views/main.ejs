@@ -177,19 +177,21 @@
     </div>
     <div class="modal_content_custom">
       <label>With you and:</label>
-      <div class="tooltip_">
-      <input type="text" name="friends" readonly id="frnd_names" placeholder="friend's name" value="shreyansh" />
+      <hr>
+
+      <!-- <input type="text" name="friends" readonly id="frnd_names" placeholder="friend's name" value="shreyansh" />
         <span class="tooltip_text_" value="shreyansh">shreyansh </span>
         <span class="tooltip_text_" value="titu">titu </span>
         <span class="tooltip_text_" value="golu">golu </span>
-      </div>
-      <br>
-      <input type="text" name="description" placeholder="Enter a description">
-      <br>
-      <input type="text" name="amount" placeholder="0.00">
-      <br>
+      </div> -->
+
+  <% friendList.forEach((friend,i) => { %>
+<%console.log(friend);%>
+      <span  id=<%=i%> style="display:none"></span>
+       <input type="text" id=<%="input"+i%> style="display:none" /><br>
+        <% }); %>
       <button type="submit" name="button" class="btn btn-success btn-large" onclick="changeinValue()">Save</button>
-    </div>
+
   </div>
 </div>
 </form>
