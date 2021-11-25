@@ -15,7 +15,7 @@
 
           <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=<%=firstname%>+<%=lastname%>" />
 
-          <span><%=firstname%> <%=lastname%></span>
+          <span class="name"><%=firstname%> <%=lastname%></span>
           <div class="dropdown-content">
             <a href="#">Profile</a>
             <a href="/logout">Log Out</a>
@@ -62,9 +62,9 @@
             <!-- <button class="add-button"> + Add</button>  -->
           </div>
           <ul class="unordered-list">
-              <% friendList.forEach((friend) => { %>
+            <% friendList.forEach((friend) => { %>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend %></li>
-                        <% }); %>
+            <% }); %>
             <!-- <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />You</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Me</li>
             <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png />Our friend 1</li>
@@ -78,12 +78,12 @@
           <div class="sidebar-heading">Invite Friends</div>
           <form class="" action="/invite" method="post">
 
-          <div class="sidebar_invites">
-            <input class="invite_email" type="text" placeholder="Enter the username" name="invited_frnd"/>
-            <br />
-            <button class="send_invite" type="submit">Send invite</button>
-            <p class="error" style="display:<%=invite_warning%>"><%=error_msg%></p>
-          </div>
+            <div class="sidebar_invites">
+              <input class="invite_email" type="text" placeholder="Enter the username" name="invited_frnd" />
+              <br />
+              <button class="send_invite" type="submit">Send invite</button>
+              <p class="error" style="display:<%=invite_warning%>"><%=error_msg%></p>
+            </div>
           </form>
         </div>
       </div>
@@ -125,12 +125,16 @@
 
       <div class="all-info">
         <div class="all-info-heading row">
-          <div class="col you-owe"><h4>YOU OWE</h4></div>
-          <div class="col you-are-owed"><h4>YOU ARE OWED</h4></div>
+          <div class="col you-owe">
+            <h4>YOU OWE</h4>
+          </div>
+          <div class="col you-are-owed">
+            <h4>YOU ARE OWED</h4>
+          </div>
         </div>
         <div class="list">
-            <div class="positives"></div>
-            <div class="negatives"></div>
+          <div class="positives"></div>
+          <div class="negatives"></div>
         </div>
       </div>
     </div>
@@ -153,49 +157,62 @@
         <label><%= friend %></label>
         <br>
         <% }); %>
-        <br>
       </div>
       <!-- <div class="select_all" style="float:right">
         <input type="checkbox" value="ALL" id="all">
         <label>Select all friend</label>
         <br>
       </div> -->
-
-
-      <button type="submit" name="friend" class="btn btn-success btn-large" onclick="xyz()">Next</button>
+      <div class="save-button">
+        <button type="submit" name="friend" class="btn btn-success btn-large" onclick="addFriend()">Next</button>
+      </div>
       <p id="warning_frnd" style="display:none">*Select atleast one friend</p>
     </div>
   </div>
 </div>
 
 <!-- Expense Adding modal -->
-<form  action="/temp" method="post">
-<div class="modalExp" id="exp-modal">
-  <div class="modal-content">
-    <div class="modal_heading_custom">
-      <h1 id="modal-h1">Add an expense</h1>
-      <div class="closeBtn" onclick="closeExp()">x</div>
-    </div>
-    <div class="modal_content_custom">
-      <label>With you and:</label>
-      <hr>
+<form action="/temp" method="post">
+  <div class="modalExp" id="exp-modal">
+    <div class="modal-content">
+      <div class="modal_heading_custom">
+        <h1 id="modal-h1">Add an expense</h1>
+        <div class="closeBtn" onclick="closeExp()">x</div>
+      </div>
+      <div class="modal_content_custom">
+        Add the amount paid by individual person.
+        <!-- <label>With you and:</label>
+      <hr> -->
 
-      <!-- <input type="text" name="friends" readonly id="frnd_names" placeholder="friend's name" value="shreyansh" />
+        <!-- <input type="text" name="friends" readonly id="frnd_names" placeholder="friend's name" value="shreyansh" />
         <span class="tooltip_text_" value="shreyansh">shreyansh </span>
         <span class="tooltip_text_" value="titu">titu </span>
         <span class="tooltip_text_" value="golu">golu </span> -->
+        <div class="all-people">
+          <div class="individual-friend">
+            <%= username %>
+            <div class="input-area">
+              <span class="currency">₹</span>
+              <input type="text" placeholder="0.00" name="amountUser"/>
+            </div>
+          </div>
+
+          <% friendList.forEach((friend,i) => { %>
+          <div class="individual-friend">
+            <span id=<%=i%> style="display:none"></span>
+            <div class="input-area">
+              <span class="currency" id="currency<%=i%>" style="display:none">₹</span>
+              <input type="text" id="input<%=i%>" style="display:none" placeholder="0.00" name="amount<%=i%>" />
+            </div>
+          </div>
+          <% }); %>
+        </div>
+        <div class="save-button">
+          <button type="submit" name="button" class="btn btn-success btn-large" onclick="changeinValue()">Save</button>
+        </div>
       </div>
-
-
-  <% friendList.forEach((friend,i) => { %>
-<%console.log(friend);%>
-      <span  id=<%=i%> style="display:none"></span>
-       <input type="text" id=<%="input"+i%> style="display:none" /><br>
-        <% }); %>
-      <button type="submit" name="button" class="btn btn-success btn-large" onclick="changeinValue()">Save</button>
-
+    </div>
   </div>
-</div>
 </form>
 
 <%- include('partials/footer') %>

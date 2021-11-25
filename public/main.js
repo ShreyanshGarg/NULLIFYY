@@ -36,7 +36,8 @@ function addFriend() {
      document.getElementById(i).textContent=friend;
      document.getElementById(i).style.display="block";
          console.log(document.getElementById("input"+i));
-     document.getElementById("input"+i).style.display="block";
+     document.getElementById("currency"+i).style.display="inline";
+     document.getElementById("input"+i).style.display="inline";
 
     })
 
@@ -59,6 +60,15 @@ function changeinValue(){
 
 function closeExp() {
   var modalExp = document.getElementById("exp-modal");
+  list.forEach((friend,i)=>{
+
+   document.getElementById(i).textContent="";
+   document.getElementById(i).style.display="none";
+       //console.log(document.getElementById("input"+i));
+   document.getElementById("currency"+i).style.display="none";
+   document.getElementById("input"+i).style.display="none";
+
+  })
   list = [];
   closeFriend();
   modalExp.style.display = "none";
@@ -73,6 +83,7 @@ window.onclick = function(event) {
 }
 
 function closeFriend() {
+  list = [];
   var modalFriends = document.getElementById("friends-modal");
   // turning warning message off
   document.getElementById("warning_frnd").style.display = "none";
@@ -85,4 +96,8 @@ function closeFriend() {
   }
   // close modal
   modalFriends.style.display = "none";
+}
+
+function xyz() {
+  document.getElementByClass(x).load("/xyz");
 }

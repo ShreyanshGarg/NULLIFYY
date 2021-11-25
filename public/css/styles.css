@@ -53,11 +53,11 @@
   float: right;
 }
 
-span {
+.name {
   transition: 0.6s;
 }
 
-span:hover {
+.name:hover {
   background: #48be9d;
   color: #ffffff;
   cursor: pointer;
@@ -469,7 +469,7 @@ a:hover {
   margin: 15% auto;
   /* padding: 5px 20px 20px 20px; */
   border: 1px solid #888;
-  width: 40%;
+  max-width: 30%;
   display: block;
 }
 
@@ -498,6 +498,8 @@ a:hover {
 
 .modal_content_custom {
   padding: 10px;
+  max-height: 250px;
+  overflow-y:scroll;
 }
 
 .modalFriends {
@@ -508,6 +510,37 @@ a:hover {
   height: 100%;
   left: 0;
   top: 0;
+}
+
+.all-people {
+  padding-left: 30px;
+}
+
+.input-area {
+  margin-top: 3px;
+  margin-bottom: 1px;
+}
+
+.currency {
+  display: inline-block;
+  width: auto;
+  min-width: 16px;
+  padding: 4px 5px;
+  font-weight: normal;
+  line-height: 18px;
+  text-align: center;
+  text-shadow: 0 1px 0 #ffffff;
+  background-color: #eeeeee;
+  border: 1px solid #ccc;
+  border-radius: 3px 0 0 3px;
+  margin-right: -1px;
+
+}
+
+.save-button {
+  padding: 10px;
+  display:flex;
+  justify-content: center;
 }
 
 /* --------------------------tooltip css----------------------------- */

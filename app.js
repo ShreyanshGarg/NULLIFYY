@@ -114,7 +114,8 @@ app.get("/dashboard", function(req, res) {
       lastname: req.user.lastName,
       friendList: req.user.friends,
       invite_warning:"block",
-      error_msg:context
+      error_msg:context,
+      username: req.user.username
     });
   } else {
     // authentication fails
@@ -128,6 +129,10 @@ app.get("/logout", function(req, res) {
   req.logout();
   console.log("logged out");
   res.redirect("/");
+})
+
+app.get("/xyz",function(req, res) {
+  console.log("Hello");
 })
 
 // ***********Signup request***************
@@ -193,12 +198,12 @@ app.post("/main", function(req, res) {
 })
 
 app.post("/temp", function(req, res) {
-  console.log(req.body.friends);
-  res.render("main", {
-    firstname: "shreyansh",
-    lastname: "garg",
-    friendList: ["titu", "golu"]
-  });
+  console.log(req.body);
+  // res.render("main", {
+  //   firstname: "shreyansh",
+  //   lastname: "garg",
+  //   friendList: ["titu", "golu"]
+  // });
 })
 
 app.post("/invite", function(req, res) {
