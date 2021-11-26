@@ -1,11 +1,8 @@
 const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
-var url = require('url');
 const passportLocalMongoose = require("passport-local-mongoose");
-var cookieParser = require("cookie-parser");
-
-
+const cookieParser = require("cookie-parser");
 const ejs = require("ejs");
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
@@ -35,6 +32,13 @@ mongoose.connect("mongodb://localhost:27017/profileDB", {
 
 var msg = 0;
 
+const friendSchema = mongoose.Schema({
+  name: [String],
+  amount: Number
+});
+
+const Friend = new mongoose.model('Friend', friendSchema);
+
 const userSchema = new mongoose.Schema({
   firstName: String,
   lastName: String,
@@ -42,7 +46,7 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   phoneno: Number,
-  friends: [String]
+  friends: [Friend.schema]
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -92,28 +96,16 @@ app.get("/", function(req, res) {
 
 app.get("/dashboard", function(req, res) {
   if (req.isAuthenticated()) {
-    //     //req.user gives access to the info of authenticated user
-    // var passedVariable = req.query.valid;
-    // if(passedVariable=="shreyansh"){
-    // console.log(passedVariable);
-    // req.query.valid="tanmay";
-    // passedVariable = req.query.valid
-    // }
-    // else{
-    // console.log(passedVariable);
-    // }
 
     var context = req.cookies["context"];
     res.clearCookie("context", {
       httpOnly: true
     });
-    console.log(context);
 
     res.render("main", {
       firstname: req.user.firstName,
       lastname: req.user.lastName,
       friendList: req.user.friends,
-      invite_warning:"block",
       error_msg:context,
       username: req.user.username
     });
@@ -131,9 +123,6 @@ app.get("/logout", function(req, res) {
   res.redirect("/");
 })
 
-app.get("/xyz",function(req, res) {
-  console.log("Hello");
-})
 
 // ***********Signup request***************
 app.post("/register", function(req, res) {
@@ -197,13 +186,9 @@ app.post("/main", function(req, res) {
   res.render("main.ejs");
 })
 
-app.post("/temp", function(req, res) {
+app.post("/expCalc", function(req, res) {
   console.log(req.body);
-  // res.render("main", {
-  //   firstname: "shreyansh",
-  //   lastname: "garg",
-  //   friendList: ["titu", "golu"]
-  // });
+
 })
 
 app.post("/invite", function(req, res) {

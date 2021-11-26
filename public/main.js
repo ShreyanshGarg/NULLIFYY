@@ -54,9 +54,9 @@ function addFriend() {
 }
 
 
-// function changeinValue(){
-//   document.getElementById("frnd_names").value = list;
-// }
+function changeinValue(){
+  document.getElementById("Save-btn").value = list;
+}
 
 function closeExp() {
   var modalExp = document.getElementById("exp-modal");
