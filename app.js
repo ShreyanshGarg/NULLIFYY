@@ -32,12 +32,7 @@ mongoose.connect("mongodb://localhost:27017/profileDB", {
 
 var msg = 0;
 
-const friendSchema = mongoose.Schema({
-  name: [String],
-  amount: Number
-});
 
-const Friend = new mongoose.model('Friend', friendSchema);
 
 const userSchema = new mongoose.Schema({
   firstName: String,
@@ -46,7 +41,10 @@ const userSchema = new mongoose.Schema({
   username: String,
   password: String,
   phoneno: Number,
-  friends: [Friend.schema]
+  friends: [{
+    name:String,
+    amount:Number
+  }]
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -212,7 +210,7 @@ app.post("/invite", function(req, res) {
             // already frnd exist in frnds array of user
 
             req.user.friends.forEach((item, i) => {
-              if (item === req.body.invited_frnd) {
+              if (item.name === req.body.invited_frnd) {
                 error_message = "Already Exist";
                 return;
               }
@@ -223,7 +221,10 @@ app.post("/invite", function(req, res) {
                 _id: req.user._id
               }, {
                 "$push": {
-                  friends: req.body.invited_frnd
+                  friends:{
+                  name:  req.body.invited_frnd,
+                  amount:0
+                   }
                 }
               }, function(err) {
                 if (err) {
@@ -234,7 +235,10 @@ app.post("/invite", function(req, res) {
                 _id: result._id
               }, {
                 "$push": {
-                  friends: req.user.username
+                  friends:{
+                  name:  req.user.username,
+                  amount:0
+                   }
                 }
               }, function(err) {
                 if (err) {

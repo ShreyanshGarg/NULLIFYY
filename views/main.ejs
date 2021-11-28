@@ -63,7 +63,7 @@
           </div>
           <ul class="unordered-list">
             <% friendList.forEach((friend) => { %>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend %></li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend.name %></li>
             <% }); %>
           </ul>
         </div>
@@ -146,8 +146,8 @@
     <div class="modal_content_custom">
       <div id="selection_area">
         <% friendList.forEach((friend) => { %>
-        <input type="checkbox" id="friend_list" value="<%= friend %>" name="friends_list">
-        <label><%= friend %></label>
+        <input type="checkbox" id="friend_list" value="<%= friend.name %>" name="friends_list">
+        <label><%= friend.name %></label>
         <br>
         <% }); %>
       </div>
