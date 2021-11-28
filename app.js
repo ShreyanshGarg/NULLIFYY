@@ -185,8 +185,27 @@ app.post("/main", function(req, res) {
 })
 
 app.post("/expCalc", function(req, res) {
-  console.log(req.body);
+if(req.isAuthenticated()){
+var amountTotal=0;
+const bbb=req.body;
+// const keys = Object.keys(courses);
+for (const key in bbb) {
 
+    if (bbb.hasOwnProperty(key)) {
+
+
+        if(parseInt(` ${bbb[key]}`))
+        amountTotal +=parseInt(` ${bbb[key]}`);
+
+
+    }
+}
+
+
+}
+else{
+  res.redirect("/");
+}
 })
 
 app.post("/invite", function(req, res) {

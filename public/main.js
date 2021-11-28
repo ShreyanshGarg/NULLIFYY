@@ -70,7 +70,10 @@ function closeExp() {
 
   })
   list = [];
+  var form = document.getElementById("expense_form");
+  form.reset();
   closeFriend();
+
   modalExp.style.display = "none";
 }
 
@@ -78,8 +81,13 @@ window.onclick = function(event) {
   var modalExp = document.getElementById("exp-modal");
   var modalFriends = document.getElementById("friends-modal");
   if (event.target == modalExp || event.target == modalFriends) {
+    var form = document.getElementById("expense_form");
+    form.reset();
+    closeFriend();
     event.target.style.display = "none";
   }
+
+
 }
 
 function closeFriend() {
@@ -96,8 +104,4 @@ function closeFriend() {
   }
   // close modal
   modalFriends.style.display = "none";
-}
-
-function xyz() {
-  document.getElementByClass(x).load("/xyz");
 }
