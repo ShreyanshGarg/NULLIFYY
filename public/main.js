@@ -38,6 +38,7 @@ function addFriend() {
          console.log(document.getElementById("input"+i));
      document.getElementById("currency"+i).style.display="inline";
      document.getElementById("input"+i).style.display="inline";
+     document.getElementById("input"+i).required=true;
 
     })
 
@@ -67,6 +68,7 @@ function closeExp() {
        //console.log(document.getElementById("input"+i));
    document.getElementById("currency"+i).style.display="none";
    document.getElementById("input"+i).style.display="none";
+   document.getElementById("input"+i).required=false;
 
   })
   list = [];

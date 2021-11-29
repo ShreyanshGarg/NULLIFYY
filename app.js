@@ -42,8 +42,8 @@ const userSchema = new mongoose.Schema({
   password: String,
   phoneno: Number,
   friends: [{
-    name:String,
-    amount:Number
+    name: String,
+    amount: Number
   }]
 });
 
@@ -104,7 +104,7 @@ app.get("/dashboard", function(req, res) {
       firstname: req.user.firstName,
       lastname: req.user.lastName,
       friendList: req.user.friends,
-      error_msg:context,
+      error_msg: context,
       username: req.user.username
     });
   } else {
@@ -185,27 +185,43 @@ app.post("/main", function(req, res) {
 })
 
 app.post("/expCalc", function(req, res) {
-if(req.isAuthenticated()){
-var amountTotal=0;
-const bbb=req.body;
-// const keys = Object.keys(courses);
-for (const key in bbb) {
+  console.log(req.body);
+  if (req.isAuthenticated()) {
+    var amountTotal = 0;
+    var friend_counter = 0;
+    var friend_map=[];
+    const bbb = req.body;
+    // const keys = Object.keys(courses);
+    for (const key in bbb) {
 
-    if (bbb.hasOwnProperty(key)) {
+      if (bbb.hasOwnProperty(key)) {
 
 
-        if(parseInt(` ${bbb[key]}`))
-        amountTotal +=parseInt(` ${bbb[key]}`);
-
+        if (parseInt(` ${bbb[key]}`) >= 0) {
+           friend_counter++;
+          amountTotal += parseInt(` ${bbb[key]}`);
+        friend_map.push(parseInt(` ${bbb[key]}`));
+        }
+      }
 
     }
-}
+    // console.log(amountTotal);
+    // console.log(friend_map);
+    // console.log(friend_counter);
 
+    if (friend_counter == 2) {
+      // single friend
+      friend_map[0]-=amountTotal/2;
+      friend_map[1]-=amountTotal/2;
+      console.log(friend_map);
+    }else{
+      // multiple friends
+      console.log("group condition encountered")
+    }
 
-}
-else{
-  res.redirect("/");
-}
+  } else {
+    res.redirect("/");
+  }
 })
 
 app.post("/invite", function(req, res) {
@@ -240,10 +256,10 @@ app.post("/invite", function(req, res) {
                 _id: req.user._id
               }, {
                 "$push": {
-                  friends:{
-                  name:  req.body.invited_frnd,
-                  amount:0
-                   }
+                  friends: {
+                    name: req.body.invited_frnd,
+                    amount: 0
+                  }
                 }
               }, function(err) {
                 if (err) {
@@ -254,10 +270,10 @@ app.post("/invite", function(req, res) {
                 _id: result._id
               }, {
                 "$push": {
-                  friends:{
-                  name:  req.user.username,
-                  amount:0
-                   }
+                  friends: {
+                    name: req.user.username,
+                    amount: 0
+                  }
                 }
               }, function(err) {
                 if (err) {
