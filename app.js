@@ -209,11 +209,25 @@ app.post("/expCalc", function(req, res) {
     // console.log(friend_map);
     // console.log(friend_counter);
 
+
+
     if (friend_counter == 2) {
       // single friend
       friend_map[0]-=amountTotal/2;
       friend_map[1]-=amountTotal/2;
-      console.log(friend_map);
+      User.update({username:req.user.username,'friends.name':req.body.button},{'$inc':{
+        'friends.$.amount':friend_map[0]
+      }},function(err){
+        if(err)
+        console.log(err);
+      })
+      User.update({username:req.body.button,'friends.name':req.user.username},{'$inc':{
+        'friends.$.amount':friend_map[1]
+      }},function(err){
+        if(err)
+        console.log(err);
+      })
+      // console.log(friend_map);
     }else{
       // multiple friends
       console.log("group condition encountered")
