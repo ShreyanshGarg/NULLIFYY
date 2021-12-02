@@ -100,17 +100,27 @@
             <div class="col">
               you owe
               <br />
-              <div class="owe-amt">Rs 0.00</div>
+              <% var oweAmt = 0.00; %>
+              <% var owedAmt = 0.00; %>
+              <% var total = 0.00; %>
+              <% friendList.forEach(friend => { %>
+                <% if(friend.amount<0) { %>
+                  <% oweAmt+=friend.amount; } %>
+                <% if(friend.amount>0) { %>
+                  <% owedAmt+=friend.amount; } %>
+                <% total = owedAmt + oweAmt; %>
+              <% }) %>
+              <div class="owe-amt">₹ <%=oweAmt%></div>
             </div>
             <div class="col mid-col">
               total balance
               <br />
-              <div>Rs 0.00</div>
+              <div>₹ <%=total%></div>
             </div>
             <div class="col">
               you are owed
               <br />
-              <div class="owed-amt">Rs 0.00</div>
+              <div class="owed-amt">₹ <%=owedAmt%></div>
             </div>
           </div>
         </div>
@@ -125,9 +135,37 @@
             <h4>YOU ARE OWED</h4>
           </div>
         </div>
-        <div class="list">
-          <div class="negatives"></div>
-          <div class="positives"></div>
+        <div class="row list">
+          <div class="col negative-col">
+            <div class="negatives">
+              <ul class="list-style-remover">
+                <% friendList.forEach(friend => { %>
+                  <% if(friend.amount<0) { %>
+                    <li class="list-item">
+                      <img class="list-img" alt="img" src=images\frnd.png />
+                      <div class="list-name"><%=friend.name%></div>
+                      <div class="negative-amt">you owe ₹<%=friend.amount%></div>
+                    </li>
+                  <% } %>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+          <div class="col">
+            <div class="positives">
+              <ul class="list-style-remover">
+                <% friendList.forEach(friend => { %>
+                  <% if(friend.amount>0) { %>
+                    <li class="list-item">
+                      <img class="list-img" alt="img" src=images\frnd.png />
+                      <div class="list-name"><%=friend.name%></div>
+                      <div class="positive-amt">you are owed ₹<%=friend.amount%></div>
+                    </li>
+                  <% } %>
+                <% }) %>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>

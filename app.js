@@ -232,7 +232,7 @@ app.post("/expCalc", function(req, res) {
       // multiple friends
       console.log("group condition encountered")
     }
-
+    res.redirect("/dashboard");
   } else {
     res.redirect("/");
   }

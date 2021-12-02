@@ -209,7 +209,7 @@
   background-color: whitesmoke;
 }
 
-ul {
+.unordered-list {
   max-height: 120px;
   overflow: hidden;
   overflow-y: scroll;
@@ -448,6 +448,56 @@ a:hover {
 
 .you-owe{
   border-right:1px solid black;
+}
+
+/*--------------------------Center List CSS-------------------- */
+.list {
+  font-size: 20px;
+}
+
+.negative-col {
+  border-right: 1px solid black;
+}
+
+.list-style-remover {
+  list-style-type: none;
+  padding-left:0;
+}
+
+.list-item {
+  padding-left: 40px;
+}
+
+.list-item : hover {
+  color: #999;
+}
+
+.list-img {
+  height: 45px;
+  width: 45px;
+  border-radius: 12px;
+  margin-right: 6px;
+}
+
+.list-name {
+  display: inline;
+  font-weight: 500;
+}
+
+.negative-amt {
+  color: #dc3545;
+  margin-left: 56px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: -7px;
+}
+
+.positive-amt {
+  color: #398439;
+  margin-left: 56px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: -7px;
 }
 
 /* --------------------------Modals css----------------------------- */
