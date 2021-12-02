@@ -227,7 +227,7 @@ app.post("/expCalc", function(req, res) {
         if(err)
         console.log(err);
       })
-      // console.log(friend_map);
+
     }else{
       // multiple friends
       console.log("group condition encountered")
