@@ -80,7 +80,9 @@ function closeExp() {
 window.onclick = function(event) {
   var modalExp = document.getElementById("exp-modal");
   var modalFriends = document.getElementById("friends-modal");
-  if (event.target == modalExp || event.target == modalFriends) {
+  var settleModel = document.getElementById("settle-modal");
+  var paymentSettleModel = document.getElementById("payment-settle-modal");
+  if (event.target == modalExp || event.target == modalFriends || event.target == settleModel || event.target == paymentSettleModel) {
     var form = document.getElementById("expense_form");
     form.reset();
     closeFriend();
