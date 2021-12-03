@@ -43,6 +43,13 @@
   height: 6vh;
 }
 
+.logo-name {
+  font-weight: 600;
+  font-size: 20px;
+  display: inline;
+  margin-left:5px;
+}
+
 .logo_icon {
   height: 38px;
   width: 40px;
@@ -128,7 +135,7 @@
   }
 }
 
-/* -----------------------------Sidebar css------------------ */
+/* ------------------------Left-Sidebar css------------------ */
 .col-lg-2 .col-sm-4 {
   padding-left: 7.5px;
   padding-right: 7.5px;
@@ -252,6 +259,10 @@
   font-weight: bold;
 }
 
+.send_invite:hover {
+  cursor: pointer;
+}
+
 .error {
   margin-bottom: 0;
   color: red;
@@ -307,7 +318,7 @@ a:hover {
   /* height: 60px;
     width: 840px; */
   position: relative;
-  z-index: 9;
+  /* z-index: 9; */
   background: #eee;
   padding: 13px 10px 13px 10px;
   /* margin-bottom: 20px; */
@@ -354,12 +365,12 @@ a:hover {
 }
 
 .owe-amt {
-  color: #dc3545;
+  color: red;
   font-weight: 500;
 }
 
 .owed-amt {
-  color: #398439;
+  color: green;
   font-weight: 500;
 }
 
@@ -455,15 +466,13 @@ a:hover {
   font-size: 20px;
 }
 
-/* .negative-col :hover{
-  background-color: red;
-}
-.positive-col :hover{
-  background-color: red;
-} */
-
 .negative-col {
   border-right: 1px solid black;
+  padding: 0;
+}
+
+.positive-col {
+  padding: 0;
 }
 
 .list-style-remover {
@@ -472,11 +481,11 @@ a:hover {
 }
 
 .list-item {
-  padding-left: 40px;
+  padding-left: 55px;
 }
 
-.list-item : hover {
-  color: #999;
+.list-item:hover {
+  background: #eee;
 }
 
 .list-img {
@@ -492,7 +501,7 @@ a:hover {
 }
 
 .negative-amt {
-  color: #dc3545;
+  color: red;
   margin-left: 56px;
   font-size: 16px;
   margin-bottom: 10px;
@@ -500,11 +509,26 @@ a:hover {
 }
 
 .positive-amt {
-  color: #398439;
+  color: green;
   margin-left: 56px;
   font-size: 16px;
   margin-bottom: 10px;
   margin-top: -7px;
+}
+
+
+/* -----------------------Right-sidebar css-------------------------- */
+.request-box {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+  text-align: center;
+  font-size:12px;
+}
+
+.buttons-grp {
+  padding-top: 5px;
 }
 
 /* --------------------------Modals css----------------------------- */
@@ -532,15 +556,15 @@ cursor: pointer;
   width: fit-content;
   font-size: 25px;
   font-weight: bold;
-    text-shadow: 0 -1px 0 #318a71;
-    color: white;
+  text-shadow: 0 -1px 0 #318a71;
+  color: white;
 }
 
 .modal-content {
   margin: 15% auto;
   /* padding: 5px 20px 20px 20px; */
   border: 1px solid #888;
-  max-width: 25%;
+  max-width: 320px;
   display: block;
 }
 
@@ -552,7 +576,7 @@ cursor: pointer;
   float: right;
   font-size: 25px;
   font-weight: bold;
-  /* line-height: 0; */
+  line-height: 1;
 }
 
 .closeBtn:hover {
@@ -628,15 +652,24 @@ cursor: pointer;
   padding: 0px;
   transition: 0.3s;
 }
+
 .settle_list li{
   padding: 9px 9px 3px;
-font-family: 'Lato', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
-
 
 .modal_content_custom_settleup{
   padding: 6px;
 }
+
 #content_settleUP{
   text-align: center;
+}
+
+.who-to-whom {
+  padding: 10px 0px;
+}
+
+#amount_paid {
+  margin-bottom: 5px;
 }

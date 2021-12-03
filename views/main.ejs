@@ -8,7 +8,8 @@
   <div class="Navbar-inner">
     <div class="containeer">
       <div class="logo">
-        <img class="logo_icon" alt="NULLIFY" src="images\logo.png">NULLIFY
+        <img class="logo_icon" alt="NULLIFY" src="images\logo.png">
+        <div class="logo-name">NULLIFY</div>
       </div>
       <div class="dropdown">
         <div class="name-dropdown">
@@ -26,9 +27,10 @@
   </div>
 </div>
 
-
-<!-- section for sidebar -->
 <div class="row">
+
+
+<!-- section for left-sidebar -->
   <div class="col-lg-2 col-sm-4">
     <div class="sidebar">
       <div class="s-container">
@@ -109,23 +111,35 @@
                   <% oweAmt+=friend.amount; } %>
                 <% if(friend.amount>0) { %>
                   <% owedAmt+=friend.amount; } %>
-                <% total = owedAmt + oweAmt; %>
+                <% total = parseFloat(owedAmt + oweAmt).toFixed(2); %>
               <% }) %>
+              <% oweAmt = parseFloat(oweAmt).toFixed(2); %>
+              <% owedAmt = parseFloat(owedAmt).toFixed(2); %>
+              <% if(oweAmt==0) { %>
+              <div style="color:black" class="owe-amt">₹ <%=oweAmt%></div>
+              <% } else { %>
               <div class="owe-amt">₹ <%=oweAmt%></div>
+              <% } %>
             </div>
             <div class="col mid-col">
               total balance
               <br />
               <%  if(total<0){ %>
-              <div style="color:red">₹ <%=total%></div>
-<% }else{%>
-  <div style="color:green">₹ <%=total%></div>
-<% }%>
+              <div style="color:red;font-weight:500">₹ <%=total%></div>
+              <% }else if(total>0){%>
+              <div style="color:green;font-weight:500">₹ <%=total%></div>
+              <% } else { %>
+              <div style="font-weight:500">₹ <%=total%></div>
+              <% } %>
             </div>
             <div class="col">
               you are owed
               <br />
+              <% if(owedAmt==0) { %>
+              <div style="color:black" class="owed-amt">₹ <%=owedAmt%></div>
+              <% } else { %>
               <div class="owed-amt">₹ <%=owedAmt%></div>
+              <% } %>
             </div>
           </div>
         </div>
@@ -149,7 +163,7 @@
                     <li class="list-item">
                       <img class="list-img" alt="img" src=images\frnd.png />
                       <div class="list-name"><%=friend.name%></div>
-                      <div class="negative-amt">you owe ₹<%=friend.amount%></div>
+                      <div class="negative-amt">you owe ₹<%=parseFloat(friend.amount).toFixed(2)%></div>
                     </li>
                   <% } %>
                 <% }) %>
@@ -164,7 +178,7 @@
                     <li class="list-item">
                       <img class="list-img" alt="img" src=images\frnd.png />
                       <div class="list-name"><%=friend.name%></div>
-                      <div class="positive-amt">you are owed ₹<%=friend.amount%></div>
+                      <div class="positive-amt">you are owed ₹<%=parseFloat(friend.amount).toFixed(2)%></div>
                     </li>
                   <% } %>
                 <% }) %>
@@ -173,6 +187,29 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+
+<!-- right-sidebar -->
+  <div class="col-lg-2 col-sm-4 right-sidebar">
+
+    <!-- To be displayed at the person who save settle up -->
+    <div class="request-box" id="request-pending-box">
+        <div>Your request for settle up with "Friend" is pending from his/her end.</div>
+    </div>
+
+    <!-- To be displayed at the person with whom settle up is done -->
+    <div class="request-box" id="request-accept-box">
+
+      <!-- This form will make the post request in app.js -->
+      <form>
+        <div>Your friend "friendName" has requested to settle up the amount "value". Do you agree that the amount is recieved?</div>
+        <div class="buttons-grp">
+          <button class="btn btn-sm btn-success">Yes</button>
+          <button class="btn btn-sm btn-danger">No</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -255,22 +292,20 @@
     </div>
     <div class="modal_content_custom modal_content_custom_settleup">
       <div id="selection_area">
-<ul class="settle_list">
+        <ul class="settle_list">
         <% friendList.forEach((friend) => { %>
           <% if(friend.amount<0){%>
           <span class="list_hovering">
-<li onclick="settle_payment(this.id)" id=<%=friend.name %>,<%=friend.amount%> >  <img class="frnd_grp_img" alt="img" src=images\frnd.png /> <%= friend.name %></li>
-</span>
-        <% }%>
+            <li onclick="settle_payment(this.id)" id=<%=friend.name %>,<%=friend.amount%> >  <img class="frnd_grp_img" alt="img" src=images\frnd.png /> <%= friend.name %></li>
+          </span>
+          <% }%>
         <% }); %>
-</ul>
+        </ul>
       </div>
-
       <p id="warning_frnd" style="display:none">*Select atleast one friend</p>
     </div>
   </div>
 </div>
-
 
 
 <!-- Payment Settle Modal -->
@@ -285,10 +320,9 @@
         <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=<%=firstname%>+<%=lastname%>" />
         <img class="name_logo" alt="->" src="images\arrow_sign.png"/>
         <img class="name_logo" id="user_logo" alt="img" src="https://ui-avatars.com/api/?name=??" />
-        <br>
-         You Paid To <span id="lender_name">???</span>
-         <br>
-       <input type="nunber" name="" value="" id="amount_paid">
+        <div class="who-to-whom">You Paid To <span id="lender_name">???</span></div>
+        <span class="currency">₹</span>
+        <input type="nunber" name="" value="" id="amount_paid">
         <div class="save-button">
           <button id="Save-btn" type="submit" name="button" class="btn btn-success btn-large" onclick="changeinValue()">Save</button>
         </div>

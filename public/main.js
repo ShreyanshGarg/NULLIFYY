@@ -6,7 +6,7 @@ let list = [];
 // function for opening expense modal
 function expense() {
   // closing already existing modal
-  closeFriend_settle();
+  // closeFriend_settle();
   // opening the corrosponding modal
   var modalFriends = document.getElementById("friends-modal");
   modalFriends.style.display = "block";
@@ -113,8 +113,8 @@ function closeFriend() {
 // **function for opening expense-SETTLE modal
 function settle() {
   // closing already existing modal
-  closeExp();
-  closeFriend();
+  // closeExp();
+  // closeFriend();
   // opening the corrosponding modal
   var modalFriends = document.getElementById("settle-modal");
   modalFriends.style.display = "block";
