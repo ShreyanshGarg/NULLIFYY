@@ -90,19 +90,20 @@
         <h1 class="dash">Dashboard</h1>
         <div class="actions">
           <Button id="exp-btn" class="button-exp btn btn-md btn-danger" onclick="expense()">Add an expense</Button>
-          <Button class="button-settle btn btn-md btn-success">Settle up</Button>
+          <Button class="button-settle btn btn-md btn-success" onclick="settle()">Settle up</Button>
         </div>
       </div>
 
       <div class="total-info">
         <div class="container">
           <div class="row">
-            <div class="col">
+            <div class="col" >
               you owe
               <br />
               <% var oweAmt = 0.00; %>
               <% var owedAmt = 0.00; %>
               <% var total = 0.00; %>
+              <% var total_valColor = 'green' %>
               <% friendList.forEach(friend => { %>
                 <% if(friend.amount<0) { %>
                   <% oweAmt+=friend.amount; } %>
@@ -115,7 +116,11 @@
             <div class="col mid-col">
               total balance
               <br />
-              <div>₹ <%=total%></div>
+              <%  if(total<0){ %>
+              <div style="color:red">₹ <%=total%></div>
+<% }else{%>
+  <div style="color:green">₹ <%=total%></div>
+<% }%>
             </div>
             <div class="col">
               you are owed
@@ -151,7 +156,7 @@
               </ul>
             </div>
           </div>
-          <div class="col">
+          <div class="col positive-col" >
             <div class="positives">
               <ul class="list-style-remover">
                 <% friendList.forEach(friend => { %>
@@ -184,9 +189,11 @@
     <div class="modal_content_custom">
       <div id="selection_area">
         <% friendList.forEach((friend) => { %>
+
         <input type="checkbox" id="friend_list" value="<%= friend.name %>" name="friends_list">
         <label><%= friend.name %></label>
         <br>
+
         <% }); %>
       </div>
       <!-- <div class="select_all" style="float:right">
@@ -238,5 +245,59 @@
     </div>
   </div>
 </form>
+
+<!-- *********Expense Settle Modal code starts*********** -->
+<div class="modalFriends" id="settle-modal">
+  <div class="modal-content">
+    <div class="modal_heading_custom">
+      <h1 id="modal-h1">Select A Recipient </h1>
+      <div class="closeBtn" onclick="closeFriend_settle()">x</div>
+    </div>
+    <div class="modal_content_custom modal_content_custom_settleup">
+      <div id="selection_area">
+<ul class="settle_list">
+        <% friendList.forEach((friend) => { %>
+          <% if(friend.amount<0){%>
+          <span class="list_hovering">
+<li onclick="settle_payment(this.id)" id=<%=friend.name %>,<%=friend.amount%> >  <img class="frnd_grp_img" alt="img" src=images\frnd.png /> <%= friend.name %></li>
+</span>
+        <% }%>
+        <% }); %>
+</ul>
+      </div>
+
+      <p id="warning_frnd" style="display:none">*Select atleast one friend</p>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Payment Settle Modal -->
+<form id="expense_form" action="/settleCalc" method="post">
+  <div class="modalExp" id="payment-settle-modal">
+    <div class="modal-content">
+      <div class="modal_heading_custom">
+        <h1 id="modal-h1">Settle up</h1>
+        <div class="closeBtn" onclick="closeFriend_settle()">x</div>
+      </div>
+      <div class="modal_content_custom" id="content_settleUP">
+        <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=<%=firstname%>+<%=lastname%>" />
+        <img class="name_logo" alt="->" src="images\arrow_sign.png"/>
+        <img class="name_logo" id="user_logo" alt="img" src="https://ui-avatars.com/api/?name=??" />
+        <br>
+         You Paid To <span id="lender_name">???</span>
+         <br>
+       <input type="nunber" name="" value="" id="amount_paid">
+        <div class="save-button">
+          <button id="Save-btn" type="submit" name="button" class="btn btn-success btn-large" onclick="changeinValue()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
 
 <%- include('partials/footer') %>

@@ -1,10 +1,16 @@
+// Global Variables
+let list = [];
+
+// ************Expense Modal Starts******************
+
+// function for opening expense modal
 function expense() {
+  // closing already existing modal
+  closeFriend_settle();
+  // opening the corrosponding modal
   var modalFriends = document.getElementById("friends-modal");
   modalFriends.style.display = "block";
 }
-
-
-let list = [];
 
 // function for adding expense
 
@@ -42,14 +48,6 @@ function addFriend() {
 
     })
 
-    //
-    //
-    // if (ll >= 1) {
-    //   document.getElementById("frnd_names").value = list[0] + " and " + ll + " more ";
-    // } else {
-    //   document.getElementById("frnd_names").value = list[0];
-    // }
-// **setting value of place holder**
     document.getElementById("")
   }
 }
@@ -58,7 +56,7 @@ function addFriend() {
 function changeinValue(){
   document.getElementById("Save-btn").value = list;
 }
-
+// close Button on expense modal
 function closeExp() {
   var modalExp = document.getElementById("exp-modal");
   list.forEach((friend,i)=>{
@@ -106,4 +104,62 @@ function closeFriend() {
   }
   // close modal
   modalFriends.style.display = "none";
+}
+
+
+// ************Settlement Modal Starts******************
+
+
+// **function for opening expense-SETTLE modal
+function settle() {
+  // closing already existing modal
+  closeExp();
+  closeFriend();
+  // opening the corrosponding modal
+  var modalFriends = document.getElementById("settle-modal");
+  modalFriends.style.display = "block";
+}
+
+// function for opening 2nd settle up modal
+function settle_payment(id){
+  setTimeout(function(){
+    var modalSettle = document.getElementById("settle-modal");
+    var modalFriends = document.getElementById("payment-settle-modal");
+    modalSettle.style.display = "none";
+    modalFriends.style.display = "block";
+    console.log(id);
+    let Id=String(id);
+    let name=""
+    for(var i=0;i<Id.length;i++){
+      if(Id[i]==',')
+      break;
+      else
+      name+=Id[i];
+    }
+    let amount=Id.substring(name.length+1,Id.length);
+console.log(amount)
+    amount=amount*1;
+    amount=Math.abs(amount)
+// console.log(amount)
+    // console.log(name)
+    document.getElementById("user_logo").src="https://ui-avatars.com/api/?name=" +String(name);
+
+    document.getElementById("lender_name").innerHTML=name;
+    document.getElementById("amount_paid").value=amount;
+
+  },100);
+
+}
+
+// closing button on settle modal
+function closeFriend_settle() {
+  list = [];
+  var modalSettle = document.getElementById("settle-modal");
+  var modalFriends = document.getElementById("payment-settle-modal");
+  // close modal
+  modalFriends.style.display = "none";
+  modalSettle.style.display = "none";
+
+
+
 }

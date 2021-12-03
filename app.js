@@ -117,7 +117,7 @@ app.get("/dashboard", function(req, res) {
 
 app.get("/logout", function(req, res) {
   req.logout();
-  console.log("logged out");
+  // console.log("logged out");
   res.redirect("/");
 })
 
@@ -148,7 +148,7 @@ app.post("/register", function(req, res) {
             msg = 2;
             res.redirect("/signup");
           } else {
-            console.log(user);
+            // console.log(user);
             passport.authenticate("local")(req, res, function() {
               res.redirect("/dashboard");
             });
@@ -185,7 +185,7 @@ app.post("/main", function(req, res) {
 })
 
 app.post("/expCalc", function(req, res) {
-  console.log(req.body);
+  // console.log(req.body);
   if (req.isAuthenticated()) {
     var amountTotal = 0;
     var friend_counter = 0;

@@ -212,7 +212,7 @@
 .unordered-list {
   max-height: 120px;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   list-style-type: none;
   padding-inline-start: 0px;
   padding-left: 0;
@@ -455,6 +455,13 @@ a:hover {
   font-size: 20px;
 }
 
+/* .negative-col :hover{
+  background-color: red;
+}
+.positive-col :hover{
+  background-color: red;
+} */
+
 .negative-col {
   border-right: 1px solid black;
 }
@@ -501,6 +508,16 @@ a:hover {
 }
 
 /* --------------------------Modals css----------------------------- */
+
+/* Common CSS */
+
+.list_hovering :hover{
+  background-color: #eee;
+cursor: pointer;
+}
+
+
+/* **********Expense modal****************  */
 .modalExp {
   display: none;
   z-index: 1;
@@ -513,15 +530,21 @@ a:hover {
 
 #modal-h1 {
   width: fit-content;
+  font-size: 25px;
+  font-weight: bold;
+    text-shadow: 0 -1px 0 #318a71;
+    color: white;
 }
 
 .modal-content {
   margin: 15% auto;
   /* padding: 5px 20px 20px 20px; */
   border: 1px solid #888;
-  max-width: 30%;
+  max-width: 25%;
   display: block;
 }
+
+
 
 .closeBtn {
   color: black;
@@ -549,7 +572,8 @@ a:hover {
 .modal_content_custom {
   padding: 10px;
   max-height: 250px;
-  overflow-y:scroll;
+  overflow-y:auto;
+  font-family: 'Lato', sans-serif;
 }
 
 .modalFriends {
@@ -593,51 +617,26 @@ a:hover {
   justify-content: center;
 }
 
-/* --------------------------tooltip css----------------------------- */
-/* .tooltip_ .tooltip_text_  {
-  visibility: hidden;
-  width:169px;
-  background-color: #555;
-  color: #fff;
+
+
+/******** Expense Settle Modal CSS********* */
+
+.settle_list{
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  transition: 0.3s;
+}
+.settle_list li{
+  padding: 9px 9px 3px;
+font-family: 'Lato', sans-serif;
+}
+
+
+.modal_content_custom_settleup{
+  padding: 6px;
+}
+#content_settleUP{
   text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: relative;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: 0px;
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-frnd_names:hover .tooltip_ .tooltip_text_  {
-  visibility: visible;
-  opacity: 1;
-} */
-.tooltip_ {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip_ .tooltip_text_ {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-
-  /* Position the tooltip */
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: 0px;
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-.tooltip_:hover .tooltip_text_ {
-  visibility: visible;
 }
