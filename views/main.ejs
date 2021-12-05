@@ -195,23 +195,59 @@
   <div class="col-lg-2 col-sm-4 right-sidebar">
 
     <!-- To be displayed at the person who save settle up -->
-    <div class="request-box" id="request-pending-box">
+    <!-- <div class="request-box" id="request-pending-box">
         <div>Your request for settle up with "Friend" is pending from his/her end.</div>
+    </div> -->
+    <div class="friends">
+      <div class="friends-heading">
+
+          Pending Request
+
+      </div>
+      <ul class="unordered-list">
+        <% transactionList.forEach((transaction) => { %>
+          <%if (transaction.amount<0){%>
+        <li class="friendlist"><%= transaction.name %>-><%=Math.abs( transaction.amount)%></li>
+        <%}%>
+        <% }); %>
+      </ul>
     </div>
 
+    <div class="friends">
+      <div class="friends-heading">
+
+        Accept/Reject Request
+
+      </div>
+      <ul class="unordered-list">
+        <% transactionList.forEach((transaction) => { %>
+          <%if (transaction.amount>0){%>
+        <li class="friendlist"><%= transaction.name %>-><%= transaction.amount%>
+          <div class="buttons-grp">
+            <button class="btn btn-sm btn-success">✓</button>
+            <button class="btn btn-sm btn-danger">X</button>
+          </div>
+        </li>
+        <%}%>
+        <% }); %>
+      </ul>
+    </div>
+
+
     <!-- To be displayed at the person with whom settle up is done -->
-    <div class="request-box" id="request-accept-box">
+    <!-- <div class="request-box" id="request-accept-box"> -->
 
       <!-- This form will make the post request in app.js -->
-      <form>
+      <!-- <form>
         <div>Your friend "friendName" has requested to settle up the amount "value". Do you agree that the amount is recieved?</div>
         <div class="buttons-grp">
           <button class="btn btn-sm btn-success">Yes</button>
           <button class="btn btn-sm btn-danger">No</button>
         </div>
-      </form>
-    </div>
+      </form> -->
+    <!-- </div> -->
   </div>
+
 </div>
 
 <!-- Modals -->
@@ -322,9 +358,9 @@
         <img class="name_logo" id="user_logo" alt="img" src="https://ui-avatars.com/api/?name=??" />
         <div class="who-to-whom">You Paid To <span id="lender_name">???</span></div>
         <span class="currency">₹</span>
-        <input type="nunber" name="" value="" id="amount_paid">
+        <input type="nunber" name="settleAmount" value="" id="amount_paid">
         <div class="save-button">
-          <button id="Save-btn" type="submit" name="button" class="btn btn-success btn-large" onclick="changeinValue()">Save</button>
+          <button id="Save-btn-settle" type="submit" name="buttonSettle" class="btn btn-success btn-large" onclick="changeinValueSettle()">Save</button>
         </div>
       </div>
     </div>

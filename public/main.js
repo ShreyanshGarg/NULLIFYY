@@ -1,6 +1,6 @@
 // Global Variables
 let list = [];
-
+let name="";
 // ************Expense Modal Starts******************
 
 // function for opening expense modal
@@ -131,7 +131,7 @@ function settle_payment(id){
     modalFriends.style.display = "block";
     console.log(id);
     let Id=String(id);
-    let name=""
+
     for(var i=0;i<Id.length;i++){
       if(Id[i]==',')
       break;
@@ -162,6 +162,8 @@ function closeFriend_settle() {
   modalFriends.style.display = "none";
   modalSettle.style.display = "none";
 
+}
 
-
+function changeinValueSettle(){
+  document.getElementById("Save-btn-settle").value =name ;
 }

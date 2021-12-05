@@ -529,6 +529,7 @@ a:hover {
 
 .buttons-grp {
   padding-top: 5px;
+  display: inline;
 }
 
 /* --------------------------Modals css----------------------------- */

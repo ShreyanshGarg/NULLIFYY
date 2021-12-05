@@ -44,7 +44,12 @@ const userSchema = new mongoose.Schema({
   friends: [{
     name: String,
     amount: Number
+  }],
+  transactions:[{
+    name:String,
+    amount:Number
   }]
+
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -105,7 +110,8 @@ app.get("/dashboard", function(req, res) {
       lastname: req.user.lastName,
       friendList: req.user.friends,
       error_msg: context,
-      username: req.user.username
+      username: req.user.username,
+      transactionList:req.user.transactions
     });
   } else {
     // authentication fails
@@ -140,7 +146,8 @@ app.post("/register", function(req, res) {
           email: req.body.email,
           username: req.body.username,
           phoneno: req.body.phoneNo,
-          friends: []
+          friends: [],
+          transactions: [],
         }, req.body.password, function(err, user) {
           if (err) {
             console.log(err);
@@ -205,12 +212,6 @@ app.post("/expCalc", function(req, res) {
       }
 
     }
-    // console.log(amountTotal);
-    // console.log(friend_map);
-    // console.log(friend_counter);
-
-
-
     if (friend_counter == 2) {
       // single friend
       friend_map[0]-=amountTotal/2;
@@ -313,6 +314,45 @@ app.post("/invite", function(req, res) {
 
 })
 
+
+app.post("/settleCalc",function(req,res){
+if(req.isAuthenticated()){
+  User.updateOne({
+    _id: req.user._id
+  }, {
+    "$push": {
+      transactions: {
+        name: req.body.buttonSettle,
+        amount: req.body.settleAmount*-1
+      }
+    }
+  }, function(err) {
+    if (err) {
+      console.log(err)
+    }
+  })
+  User.updateOne({
+    username:req.body.buttonSettle
+  }, {
+    "$push": {
+      transactions: {
+        name: req.user.username,
+        amount: req.body.settleAmount
+      }
+    }
+  }, function(err) {
+    if (err) {
+      console.log(err)
+    }
+  })
+  
+  res.redirect("/dashboard");
+}
+else{
+  res.redirect("/");
+}
+
+})
 
 app.listen(3000, function() {
   console.log("Server Started on 3000");
