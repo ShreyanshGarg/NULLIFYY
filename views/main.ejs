@@ -207,7 +207,7 @@
       <ul class="unordered-list">
         <% transactionList.forEach((transaction) => { %>
           <%if (transaction.amount<0){%>
-        <li class="friendlist"><%= transaction.name %>-><%=Math.abs( transaction.amount)%></li>
+        <li class="friendlist transaction-list"><%= transaction.name %>-><%=Math.abs( transaction.amount)%></li>
         <%}%>
         <% }); %>
       </ul>
@@ -219,18 +219,22 @@
         Accept/Reject Request
 
       </div>
-      <ul class="unordered-list">
-        <% transactionList.forEach((transaction) => { %>
-          <%if (transaction.amount>0){%>
-        <li class="friendlist"><%= transaction.name %>-><%= transaction.amount%>
-          <div class="buttons-grp">
-            <button class="btn btn-sm btn-success">✓</button>
-            <button class="btn btn-sm btn-danger">X</button>
+      <form class="" action="/transacSettle" method="post">
+        <ul class="unordered-list">
+          <% transactionList.forEach((transaction) => { %>
+            <%if (transaction.amount>0){%>
+          <div class="transaction-list">
+            <li class="friendlist"><%= transaction.name %>-><%= transaction.amount%>
+              <div class="buttons-grp">
+                <button class="btn btn-sm btn-success btn-yes-no" name="accept" value="<%= transaction.name %>,<%= transaction.amount%>">✓</button>
+                <button class="btn btn-sm btn-danger btn-yes-no" name="reject" value="<%= transaction.name %>,<%= transaction.amount%>">X</button>
+              </div>
+            </li>
           </div>
-        </li>
-        <%}%>
-        <% }); %>
-      </ul>
+          <%}%>
+          <% }); %>
+        </ul>
+      </form>
     </div>
 
 

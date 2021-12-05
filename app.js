@@ -345,13 +345,66 @@ if(req.isAuthenticated()){
       console.log(err)
     }
   })
-  
+
   res.redirect("/dashboard");
 }
 else{
   res.redirect("/");
 }
 
+})
+
+app.post("/transacSettle", function(req,res) {
+  if(req.isAuthenticated()) {
+    let temp;
+    if(req.body.accept) {
+      temp = req.body.accept;
+    } else {
+      temp = req.body.reject;
+    }
+      let nameAndAmount = temp.split(",");
+      console.log(nameAndAmount);
+
+      // 1. Remove the instance from transaction array (user)
+      User.findByIdAndUpdate(
+      req.user.id, { $pull: { "transactions": { name: nameAndAmount[0], amount: nameAndAmount[1]} } }, { safe: true, upsert: true },
+      function(err) {
+          if (err) {
+            console.log(err);
+          }
+      });
+
+      //2. Remove the instance from transaction array (secondPerson)
+      User.findOneAndUpdate(
+      {username : nameAndAmount[0]}, { $pull: { "transactions": { name: req.user.username, amount: nameAndAmount[1]*-1} } }, { safe: true, upsert: true },
+      function(err) {
+          if (err) {
+            console.log(err);
+          }
+      });
+
+    if(req.body.accept) {
+      //Update amount it friendSchema (user)
+      User.update({username:req.user.username,'friends.name':nameAndAmount[0]},{'$inc':{
+        'friends.$.amount':nameAndAmount[1]*-1
+      }},function(err){
+        if(err)
+        console.log(err);
+      })
+
+      //Update amount it friendSchema (secondPerson)
+      User.update({username:nameAndAmount[0],'friends.name':req.user.username},{'$inc':{
+        'friends.$.amount':nameAndAmount[1]
+      }},function(err){
+        if(err)
+        console.log(err);
+      })
+    }
+
+    res.redirect("/dashboard");
+  } else {
+    res.redirect("/");
+  }
 })
 
 app.listen(3000, function() {
