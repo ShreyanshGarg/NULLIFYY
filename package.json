@@ -4,8 +4,9 @@
   "description": "a bill spliting web app",
   "main": "index.js",
   "scripts": {
-    "start":"node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "env-cmd -f  config/dev.env node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pretty": "prettier --write \"./**/*.{js,jsx,json}\""
   },
   "author": "shreyansh and tanmay",
   "license": "ISC",
@@ -13,12 +14,14 @@
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.6",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "mongoose": "^6.0.8",
+    "mongoose": "^6.2.7",
     "nodemon": "^2.0.13",
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^6.1.0"
+    "passport-local-mongoose": "^6.1.0",
+    "prettier": "^2.6.0"
   }
 }
