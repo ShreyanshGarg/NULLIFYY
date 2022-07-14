@@ -165,7 +165,7 @@ app.post("/main", function (req, res) {
   res.render("main.ejs");
 });
 
-app.post("/expCalc", function (req, res) {
+app.post("/expCalc", async function (req, res) {
   // console.log(req.body);
   if (req.isAuthenticated()) {
     var amountTotal = 0;
@@ -186,26 +186,20 @@ app.post("/expCalc", function (req, res) {
       // single friend
       friend_map[0] -= amountTotal / 2;
       friend_map[1] -= amountTotal / 2;
-      User.update(
+      await User.update(
         { username: req.user.username, "friends.name": req.body.button },
         {
           $inc: {
             "friends.$.amount": friend_map[0],
           },
-        },
-        function (err) {
-          if (err) console.log(err);
         }
       );
-      User.update(
+      await User.update(
         { username: req.body.button, "friends.name": req.user.username },
         {
           $inc: {
             "friends.$.amount": friend_map[1],
           },
-        },
-        function (err) {
-          if (err) console.log(err);
         }
       );
     } else {
