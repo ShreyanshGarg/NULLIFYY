@@ -1,0 +1,56 @@
+<!-- section for left-sidebar -->
+
+<div class="col-lg-2 col-sm-4">
+    <div class="sidebar">
+      <div class="s-container">
+        <div class="dashboard">
+          <a href="/dashboard" class="link">
+            <span class="sidebar-heading">Dashboard</span>
+          </a>
+        </div>
+        <div class="groups">
+          <div class="groups-heading">
+            <a href="/groups" class="link">
+              Groups
+            </a>
+            <button class="add-button"> + Add</button>
+          </div>
+          <ul class="unordered-list">
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 1</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 2</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 3</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 4</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 5</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 6</li>
+            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 7</li>
+          </ul>
+        </div>
+        <div class="friends">
+          <div class="friends-heading">
+            <a href="/friends" class="link">
+              Friends
+            </a>
+            <!-- <button class="add-button"> + Add</button>  -->
+          </div>
+          <ul class="unordered-list">
+            <% friendList.forEach((friend) => { %>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend.name %></li>
+            <% }); %>
+          </ul>
+        </div>
+        <div class="invite-friend">
+          <div class="sidebar-heading">Invite Friends</div>
+          <form class="" action="/invite" method="post">
+
+            <div class="sidebar_invites">
+              <input class="invite_email" type="text" placeholder="Enter the username" name="invited_frnd" />
+              <br />
+              <button class="send_invite" type="submit">Send invite</button>
+              <p class="error"><%=error_msg%></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+

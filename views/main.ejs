@@ -1,91 +1,15 @@
 <%- include('partials/header') %>
 
 
-<!-- sectin for navbar -->
-
-
-<div class="Navbar-sec">
-  <div class="Navbar-inner">
-    <div class="containeer">
-      <div class="logo">
-        <img class="logo_icon" alt="NULLIFY" src="images\logo.png">
-        <div class="logo-name">NULLIFY</div>
-      </div>
-      <div class="dropdown">
-        <div class="name-dropdown">
-
-          <img class="name_logo" alt="img" src="https://ui-avatars.com/api/?name=<%=firstname%>+<%=lastname%>" />
-
-          <span class="name"><%=firstname%> <%=lastname%></span>
-          <div class="dropdown-content">
-            <a href="#">Profile</a>
-            <a href="/logout">Log Out</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
+<!-- section for navbar -->
+<%- include('navBar') %>
 
 
 <!-- section for left-sidebar -->
-  <div class="col-lg-2 col-sm-4">
-    <div class="sidebar">
-      <div class="s-container">
-        <div class="dashboard">
-          <a href="/dashboard" class="link">
-            <span class="sidebar-heading">Dashboard</span>
-          </a>
-        </div>
-        <div class="groups">
-          <div class="groups-heading">
-            <a href="/groups" class="link">
-              Groups
-            </a>
-            <button class="add-button"> + Add</button>
-          </div>
-          <ul class="unordered-list">
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 1</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 2</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 3</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 4</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 5</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 6</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 7</li>
-          </ul>
-        </div>
-        <div class="friends">
-          <div class="friends-heading">
-            <a href="/friends" class="link">
-              Friends
-            </a>
-            <!-- <button class="add-button"> + Add</button>  -->
-          </div>
-          <ul class="unordered-list">
-            <% friendList.forEach((friend) => { %>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend.name %></li>
-            <% }); %>
-          </ul>
-        </div>
-        <div class="invite-friend">
-          <div class="sidebar-heading">Invite Friends</div>
-          <form class="" action="/invite" method="post">
+<%- include('leftSideBar') %>
 
-            <div class="sidebar_invites">
-              <input class="invite_email" type="text" placeholder="Enter the username" name="invited_frnd" />
-              <br />
-              <button class="send_invite" type="submit">Send invite</button>
-              <p class="error"><%=error_msg%></p>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Center Part -->
+<!-- Center Part -->
   <div class="col-lg-8 col-sm-8 center">
     <div class="top">
       <div class="topbar">
@@ -192,50 +116,7 @@
 
 
 <!-- right-sidebar -->
-  <div class="col-lg-2 col-sm-4 right-sidebar">
-
-    <!-- To be displayed at the person who save settle up -->
-    <!-- <div class="request-box" id="request-pending-box">
-        <div>Your request for settle up with "Friend" is pending from his/her end.</div>
-    </div> -->
-    <div class="friends">
-      <div class="friends-heading">
-
-          Pending Request
-
-      </div>
-      <ul class="unordered-list">
-        <% transactionList.forEach((transaction) => { %>
-          <%if (transaction.amount<0){%>
-        <li class="friendlist transaction-list"><%= transaction.name %>-><%=Math.abs( transaction.amount)%></li>
-        <%}%>
-        <% }); %>
-      </ul>
-    </div>
-
-    <div class="friends">
-      <div class="friends-heading">
-
-        Accept/Reject Request
-
-      </div>
-      <form class="" action="/transacSettle" method="post">
-        <ul class="unordered-list">
-          <% transactionList.forEach((transaction) => { %>
-            <%if (transaction.amount>0){%>
-          <div class="transaction-list">
-            <li class="friendlist"><%= transaction.name %>-><%= transaction.amount%>
-              <div class="buttons-grp">
-                <button class="btn btn-sm btn-success btn-yes-no" name="accept" value="<%= transaction.name %>,<%= transaction.amount%>">✓</button>
-                <button class="btn btn-sm btn-danger btn-yes-no" name="reject" value="<%= transaction.name %>,<%= transaction.amount%>">X</button>
-              </div>
-            </li>
-          </div>
-          <%}%>
-          <% }); %>
-        </ul>
-      </form>
-    </div>
+<%- include('rightSideBar') %>
 
 
     <!-- To be displayed at the person with whom settle up is done -->
@@ -250,9 +131,7 @@
         </div>
       </form> -->
     <!-- </div> -->
-  </div>
 
-</div>
 
 <!-- Modals -->
 

@@ -1,0 +1,47 @@
+<div class="col-lg-2 col-sm-4 right-sidebar">
+
+    <!-- To be displayed at the person who save settle up -->
+    <!-- <div class="request-box" id="request-pending-box">
+        <div>Your request for settle up with "Friend" is pending from his/her end.</div>
+    </div> -->
+    <div class="friends">
+      <div class="friends-heading">
+
+          Pending Request
+
+      </div>
+      <ul class="unordered-list">
+        <% transactionList.forEach((transaction) => { %>
+          <%if (transaction.amount<0){%>
+        <li class="friendlist transaction-list"><%= transaction.name %>-><%=Math.abs( transaction.amount)%></li>
+        <%}%>
+        <% }); %>
+      </ul>
+    </div>
+
+    <div class="friends">
+      <div class="friends-heading">
+
+        Accept/Reject Request
+
+      </div>
+      <form class="" action="/transacSettle" method="post">
+        <ul class="unordered-list">
+          <% transactionList.forEach((transaction) => { %>
+            <%if (transaction.amount>0){%>
+          <div class="transaction-list">
+            <li class="friendlist"><%= transaction.name %>-><%= transaction.amount%>
+              <div class="buttons-grp">
+                <button class="btn btn-sm btn-success btn-yes-no" name="accept" value="<%= transaction.name %>,<%= transaction.amount%>">✓</button>
+                <button class="btn btn-sm btn-danger btn-yes-no" name="reject" value="<%= transaction.name %>,<%= transaction.amount%>">X</button>
+              </div>
+            </li>
+          </div>
+          <%}%>
+          <% }); %>
+        </ul>
+      </form>
+    </div>
+</div>
+
+</div>
