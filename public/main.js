@@ -37,6 +37,10 @@ function addFriend() {
     var ll = list.length;
     ll = ll - 1;
 
+    let disp;
+    list.length > 1 ? disp = "block" : disp = "none";
+    document.querySelector(".group-name").style.display = disp;
+
     list.forEach((friend, i) => {
       document.getElementById(i).textContent = friend;
       document.getElementById(i).style.display = "block";
