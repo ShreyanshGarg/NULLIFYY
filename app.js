@@ -295,9 +295,9 @@ app.post("/invite", function (req, res) {
   );
 });
 
-app.post("/settleCalc", function (req, res) {
+app.post("/settleCalc", async function (req, res) {
   if (req.isAuthenticated()) {
-    User.updateOne(
+    await User.updateOne(
       {
         _id: req.user._id,
       },
@@ -309,13 +309,8 @@ app.post("/settleCalc", function (req, res) {
           },
         },
       },
-      function (err) {
-        if (err) {
-          console.log(err);
-        }
-      }
     );
-    User.updateOne(
+    await User.updateOne(
       {
         username: req.body.buttonSettle,
       },
@@ -327,11 +322,6 @@ app.post("/settleCalc", function (req, res) {
           },
         },
       },
-      function (err) {
-        if (err) {
-          console.log(err);
-        }
-      }
     );
 
     res.redirect("/dashboard");
@@ -340,7 +330,7 @@ app.post("/settleCalc", function (req, res) {
   }
 });
 
-app.post("/transacSettle", function (req, res) {
+app.post("/transacSettle", async function (req, res) {
   if (req.isAuthenticated()) {
     let temp;
     if (req.body.accept) {
@@ -352,7 +342,7 @@ app.post("/transacSettle", function (req, res) {
     console.log(nameAndAmount);
 
     // 1. Remove the instance from transaction array (user)
-    User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       req.user.id,
       {
         $pull: {
@@ -360,15 +350,10 @@ app.post("/transacSettle", function (req, res) {
         },
       },
       { safe: true, upsert: true },
-      function (err) {
-        if (err) {
-          console.log(err);
-        }
-      }
     );
 
     //2. Remove the instance from transaction array (secondPerson)
-    User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { username: nameAndAmount[0] },
       {
         $pull: {
@@ -379,11 +364,6 @@ app.post("/transacSettle", function (req, res) {
         },
       },
       { safe: true, upsert: true },
-      function (err) {
-        if (err) {
-          console.log(err);
-        }
-      }
     );
 
     if (req.body.accept) {
@@ -401,16 +381,13 @@ app.post("/transacSettle", function (req, res) {
       );
 
       //Update amount it friendSchema (secondPerson)
-      User.update(
+      await User.update(
         { username: nameAndAmount[0], "friends.name": req.user.username },
         {
           $inc: {
             "friends.$.amount": nameAndAmount[1],
           },
         },
-        function (err) {
-          if (err) console.log(err);
-        }
       );
     }
 
