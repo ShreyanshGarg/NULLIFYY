@@ -1,4 +1,4 @@
-// Global Variables
+// Global variables
 let list = [];
 let name = "";
 // ************Expense Modal Starts******************
@@ -8,7 +8,7 @@ function expense() {
   // closing already existing modal
   // closeFriend_settle();
   // opening the corrosponding modal
-  var modalFriends = document.getElementById("friends-modal");
+  let modalFriends = document.getElementById("friends-modal");
   modalFriends.style.display = "block";
 }
 
@@ -16,9 +16,9 @@ function expense() {
 
 function addFriend() {
   // code for retrieving values from of selected friend
-  var checkboxes = document.getElementsByName("friends_list");
+  let checkboxes = document.getElementsByName("friends_list");
   list = [];
-  for (var checkbox of checkboxes) {
+  for (let checkbox of checkboxes) {
     if (checkbox.checked) {
       // inserting friends in an array for further use
       list.push(checkbox.value);
@@ -29,12 +29,12 @@ function addFriend() {
   if (list.length === 0) {
     document.getElementById("warning_frnd").style.display = "block";
   } else {
-    var modalExp = document.getElementById("exp-modal");
-    var modalFriends = document.getElementById("friends-modal");
+    let modalExp = document.getElementById("exp-modal");
+    let modalFriends = document.getElementById("friends-modal");
     modalExp.style.display = "block";
     modalFriends.style.display = "none";
 
-    var ll = list.length;
+    let ll = list.length;
     ll = ll - 1;
 
     let disp;
@@ -59,7 +59,7 @@ function changeinValue() {
 }
 // close Button on expense modal
 function closeExp() {
-  var modalExp = document.getElementById("exp-modal");
+  let modalExp = document.getElementById("exp-modal");
   list.forEach((friend, i) => {
     document.getElementById(i).textContent = "";
     document.getElementById(i).style.display = "none";
@@ -69,7 +69,7 @@ function closeExp() {
     document.getElementById("input" + i).required = false;
   });
   list = [];
-  var form = document.getElementById("expense_form");
+  let form = document.getElementById("expense_form");
   form.reset();
   closeFriend();
 
@@ -77,17 +77,17 @@ function closeExp() {
 }
 
 window.onclick = function (event) {
-  var modalExp = document.getElementById("exp-modal");
-  var modalFriends = document.getElementById("friends-modal");
-  var settleModel = document.getElementById("settle-modal");
-  var paymentSettleModel = document.getElementById("payment-settle-modal");
+  let modalExp = document.getElementById("exp-modal");
+  let modalFriends = document.getElementById("friends-modal");
+  let settleModel = document.getElementById("settle-modal");
+  let paymentSettleModel = document.getElementById("payment-settle-modal");
   if (
     event.target == modalExp ||
     event.target == modalFriends ||
     event.target == settleModel ||
     event.target == paymentSettleModel
   ) {
-    var form = document.getElementById("expense_form");
+    let form = document.getElementById("expense_form");
     form.reset();
     closeFriend();
     event.target.style.display = "none";
@@ -96,12 +96,12 @@ window.onclick = function (event) {
 
 function closeFriend() {
   list = [];
-  var modalFriends = document.getElementById("friends-modal");
+  let modalFriends = document.getElementById("friends-modal");
   // turning warning message off
   document.getElementById("warning_frnd").style.display = "none";
   // unchecking selected friends after closing the modal
-  var checkboxes = document.getElementsByName("friends_list");
-  for (var checkbox of checkboxes) {
+  let checkboxes = document.getElementsByName("friends_list");
+  for (let checkbox of checkboxes) {
     if (checkbox.checked) {
       checkbox.checked = false;
     }
@@ -118,24 +118,26 @@ function settle() {
   // closeExp();
   // closeFriend();
   // opening the corrosponding modal
-  var modalFriends = document.getElementById("settle-modal");
+  let modalFriends = document.getElementById("settle-modal");
   modalFriends.style.display = "block";
 }
 
 // function for opening 2nd settle up modal
 function settle_payment(id) {
+
   setTimeout(function () {
-    var modalSettle = document.getElementById("settle-modal");
-    var modalFriends = document.getElementById("payment-settle-modal");
+    let modalSettle = document.getElementById("settle-modal");
+    let modalFriends = document.getElementById("payment-settle-modal");
     modalSettle.style.display = "none";
     modalFriends.style.display = "block";
     console.log(id);
     let Id = String(id);
 
-    for (var i = 0; i < Id.length; i++) {
+    for (let i = 0; i < Id.length; i++) {
       if (Id[i] == ",") break;
       else name += Id[i];
     }
+    
     let amount = Id.substring(name.length + 1, Id.length);
     console.log(amount);
     amount = amount * 1;
@@ -148,13 +150,15 @@ function settle_payment(id) {
     document.getElementById("lender_name").innerHTML = name;
     document.getElementById("amount_paid").value = amount;
   }, 100);
+
 }
 
 // closing button on settle modal
 function closeFriend_settle() {
   list = [];
-  var modalSettle = document.getElementById("settle-modal");
-  var modalFriends = document.getElementById("payment-settle-modal");
+  name = "";
+  let modalSettle = document.getElementById("settle-modal");
+  let modalFriends = document.getElementById("payment-settle-modal");
   // close modal
   modalFriends.style.display = "none";
   modalSettle.style.display = "none";
