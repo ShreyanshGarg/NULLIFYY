@@ -182,6 +182,7 @@ app.post("/expCalc", async function (req, res) {
         }
       }
     }
+
     if (friend_counter == 2) {
       // single friend
       friend_map[0] -= amountTotal / 2;
@@ -204,6 +205,50 @@ app.post("/expCalc", async function (req, res) {
       );
     } else {
       // multiple friends
+
+      let amount_array = new Array(friend_counter);
+      
+      // Friends array formation 
+      let friends_array = new Array(friend_counter);
+      let frnd_string = req.body.button;
+      friends_array = frnd_string.split(","); 
+      friends_array.unshift(req.user.username);
+
+      console.log(friends_array)
+      for (let i = 0; i < amount_array.length; i++) {
+        amount_array[i] = new Array(friend_counter);
+      }
+
+      // Initializing amount array with zero 
+      for (let i = 0; i < friend_counter; i++) {
+        for (let j = 0; j < friend_counter; j++) {
+            amount_array[i][j] = 0;
+        }
+    }
+
+      // Main algo for calculating effective amount b/w diff users
+      for (let i in friend_map) {
+        // console.log(i);
+        let divided_amount = friend_map[i] / friend_counter;
+        // console.log(divided_amount)
+        for (let j = 0; j < friend_counter; j++) {
+          if (i == j) amount_array[i][j] = 0;
+
+          if (i < j) amount_array[i][j] -= divided_amount;
+
+          if (j < i) amount_array[j][i] += divided_amount;
+        }
+        
+        console.log(amount_array);
+      }
+     
+      // round of the amount to 2 decimal places 
+      for (let i = 0; i < friend_counter; i++) {
+        for (let j = 0; j < friend_counter; j++) {
+            amount_array[i][j] = amount_array[i][j].toFixed(2) * 1;
+        }
+    }
+    console.log(amount_array);
       console.log("group condition encountered");
     }
     res.redirect("/dashboard");
@@ -308,7 +353,7 @@ app.post("/settleCalc", async function (req, res) {
             amount: req.body.settleAmount * -1,
           },
         },
-      },
+      }
     );
     await User.updateOne(
       {
@@ -321,7 +366,7 @@ app.post("/settleCalc", async function (req, res) {
             amount: req.body.settleAmount,
           },
         },
-      },
+      }
     );
 
     res.redirect("/dashboard");
@@ -387,7 +432,7 @@ app.post("/transacSettle", async function (req, res) {
           $inc: {
             "friends.$.amount": nameAndAmount[1],
           },
-        },
+        }
       );
     }
 
