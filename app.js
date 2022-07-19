@@ -222,9 +222,9 @@ app.post("/expCalc", async function (req, res) {
       // Initializing amount array with zero 
       for (let i = 0; i < friend_counter; i++) {
         for (let j = 0; j < friend_counter; j++) {
-            amount_array[i][j] = 0;
+          amount_array[i][j] = 0;
         }
-    }
+      }
 
       // Main algo for calculating effective amount b/w diff users
       for (let i in friend_map) {
@@ -238,18 +238,18 @@ app.post("/expCalc", async function (req, res) {
 
           if (j < i) amount_array[j][i] += divided_amount;
         }
-        
         console.log(amount_array);
       }
      
       // round of the amount to 2 decimal places 
       for (let i = 0; i < friend_counter; i++) {
         for (let j = 0; j < friend_counter; j++) {
-            amount_array[i][j] = amount_array[i][j].toFixed(2) * 1;
+          amount_array[i][j] = amount_array[i][j].toFixed(2) * 1;
         }
-    }
-    console.log(amount_array);
-      console.log("group condition encountered");
+      }
+      console.log(amount_array);
+      minCashFlow(amount_array,friends_array,friend_counter);
+      //console.log("group condition encountered");
     }
     res.redirect("/dashboard");
   } else {
@@ -445,3 +445,86 @@ app.post("/transacSettle", async function (req, res) {
 app.listen(process.env.PORT, function () {
   console.log("Server Started on 3000");
 });
+
+
+/*----------Find Maximum Cash Flow among a set of persons------*/
+
+// Number of persons (or vertices in the graph)
+// let N = 3;
+
+// A utility function that returns index of minimum value in arr
+function getMin(arr,N)
+{
+	let minInd = 0;
+	for (i = 1; i < N; i++)
+		if (arr[i] < arr[minInd])
+			minInd = i;
+	return minInd;
+}
+
+// A utility function that returns index of maximum value in arr
+function getMax(arr,N)
+{
+	let maxInd = 0;
+	for (i = 1; i < N; i++)
+		if (arr[i] > arr[maxInd])
+			maxInd = i;
+	return maxInd;
+}
+
+// A utility function to return minimum of 2 values
+function minOf2(x , y)
+{
+	return (x < y) ? x: y;
+}
+
+// amount[p] indicates the net amount to be credited/debited to/from person 'p'
+// If amount[p] is positive, then i'th person will amount[i]
+// If amount[p] is negative, then i'th person will give -amount[i]
+function minCashFlowRec(amount,friendsArray,N)
+{
+	// Find the indexes of minimum and maximum values in amount
+	// amount[mxCredit] indicates the maximum amount to be given (or credited) to any person .
+	// And amount[mxDebit] indicates the maximum amount to be taken(or debited) from any person.
+	// So if there is a positive value in amount, then there must be a negative value
+	let mxCredit = getMax(amount,N), mxDebit = getMin(amount,N);
+
+	// If both amounts are 0, then all amounts are settled
+	if (amount[mxCredit] == 0 && amount[mxDebit] == 0)
+		return;
+
+	// Find the minimum of two amounts
+	let min = minOf2(-amount[mxDebit], amount[mxCredit]);
+	amount[mxCredit] -= min;
+	amount[mxDebit] += min;
+
+	// If minimum is the maximum amount to be
+  let obj = {
+    sender: friendsArray[mxDebit],
+    receiver: friendsArray[mxCredit],
+    amount: min
+  }
+	//console.log(friendsArray[mxDebit] + " has to pay " + min + " to " + friendsArray[mxCredit] + "\n");
+  console.log(obj);
+
+	// Recur for the amount array.
+	// Note that it is guaranteed that the recursion would terminate as either amount[mxCredit] or
+	// amount[mxDebit] becomes 0
+	minCashFlowRec(amount,friendsArray,N);
+}
+
+// Given a set of persons as graph where graph[i][j] indicates the amount that person i needs to 
+// pay person j, this function finds and prints the minimum cash flow to settle all debts.
+function minCashFlow(graph,friendsArray,N)
+{
+	// Create an array amount, initialize all value in it as 0.
+	let amount=Array.from({length: N}, (_, i) => 0);
+
+	// Calculate the net amount to be paid to person 'p', and stores it in amount[p]. 
+  //The value of amount[p] can be calculated by subtracting debts of 'p' from credits of 'p'
+	for (p = 0; p < N; p++)
+	for (i = 0; i < N; i++)
+		amount[p] += (graph[i][p] - graph[p][i]);
+
+	minCashFlowRec(amount,friendsArray,N);
+}
