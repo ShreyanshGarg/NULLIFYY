@@ -5,9 +5,11 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 require("./db/db_connection");
 const User = require("./models/user.js");
+const Group = require("./models/groups.js");
 const app = express();
 
 var m = false;
+let optarray = [];
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -205,7 +207,7 @@ app.post("/expCalc", async function (req, res) {
       );
     } else {
       // multiple friends
-
+      const grpInstance = new Group();
       let amount_array = new Array(friend_counter);
       
       // Friends array formation 
@@ -248,8 +250,12 @@ app.post("/expCalc", async function (req, res) {
         }
       }
       console.log(amount_array);
+      grpInstance.groupName = req.body.groupName;
+      grpInstance.personUsername = friends_array;
+      grpInstance.save();
       minCashFlow(amount_array,friends_array,friend_counter);
       //console.log("group condition encountered");
+      console.log(optarray);
     }
     res.redirect("/dashboard");
   } else {
@@ -449,9 +455,6 @@ app.listen(process.env.PORT, function () {
 
 /*----------Find Maximum Cash Flow among a set of persons------*/
 
-// Number of persons (or vertices in the graph)
-// let N = 3;
-
 // A utility function that returns index of minimum value in arr
 function getMin(arr,N)
 {
@@ -479,8 +482,6 @@ function minOf2(x , y)
 }
 
 // amount[p] indicates the net amount to be credited/debited to/from person 'p'
-// If amount[p] is positive, then i'th person will amount[i]
-// If amount[p] is negative, then i'th person will give -amount[i]
 function minCashFlowRec(amount,friendsArray,N)
 {
 	// Find the indexes of minimum and maximum values in amount
@@ -506,6 +507,7 @@ function minCashFlowRec(amount,friendsArray,N)
   }
 	//console.log(friendsArray[mxDebit] + " has to pay " + min + " to " + friendsArray[mxCredit] + "\n");
   console.log(obj);
+  optarray.push(obj);
 
 	// Recur for the amount array.
 	// Note that it is guaranteed that the recursion would terminate as either amount[mxCredit] or
