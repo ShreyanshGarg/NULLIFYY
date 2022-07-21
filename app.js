@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+const { v4:uuidv4} = require("uuid");
 require("./db/db_connection");
 const User = require("./models/user.js");
 const Group = require("./models/groups.js");
@@ -81,6 +82,7 @@ app.get("/dashboard", function (req, res) {
       firstname: req.user.firstName,
       lastname: req.user.lastName,
       friendList: req.user.friends,
+      groupList: req.user.groupsId,
       error_msg: context,
       username: req.user.username,
       transactionList: req.user.transactions,
@@ -263,8 +265,15 @@ app.post("/expCalc", async function (req, res) {
 
       }
       minCashFlow(amount_array,friends_array,friend_counter);
+      const gid = req.body.groupName + "-`-" + uuidv4();
+      for(let username of friends_array) {
+        await User.findOneAndUpdate({username: username},
+          {"$push": {"groupsId": gid}},
+          {"new": true, "upsert": true}, 
+        )
+      }
       const grpInstance = new Group({
-        groupName:req.body.groupName , 
+        groupId:gid, 
         personUsername:friends_array , 
         username:req.user.username,
         optimizeTransactions : optarray,
