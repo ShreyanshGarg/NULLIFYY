@@ -207,7 +207,7 @@ app.post("/expCalc", async function (req, res) {
       );
     } else {
       // multiple friends
-      const grpInstance = new Group();
+
       let amount_array = new Array(friend_counter);
       
       // Friends array formation 
@@ -249,11 +249,30 @@ app.post("/expCalc", async function (req, res) {
           amount_array[i][j] = amount_array[i][j].toFixed(2) * 1;
         }
       }
-      console.log(amount_array);
-      grpInstance.groupName = req.body.groupName;
-      grpInstance.personUsername = friends_array;
-      grpInstance.save();
+      // console.log(amount_array);
+
+      let amount_paid = [];
+      for(let i in friends_array){
+        let person = friends_array[i];
+        let amount = friend_map[i];
+        let obj = {
+          person,
+          amount
+        };
+        amount_paid.push(obj);
+
+      }
       minCashFlow(amount_array,friends_array,friend_counter);
+      const grpInstance = new Group({
+        groupName:req.body.groupName , 
+        personUsername:friends_array , 
+        username:req.user.username,
+        optimizeTransactions : optarray,
+        transaction:amount_paid
+      });
+
+      await grpInstance.save();
+
       //console.log("group condition encountered");
       console.log(optarray);
     }
@@ -506,13 +525,14 @@ function minCashFlowRec(amount,friendsArray,N)
     amount: min
   }
 	//console.log(friendsArray[mxDebit] + " has to pay " + min + " to " + friendsArray[mxCredit] + "\n");
-  console.log(obj);
-  optarray.push(obj);
+  // console.log(obj);
 
 	// Recur for the amount array.
 	// Note that it is guaranteed that the recursion would terminate as either amount[mxCredit] or
 	// amount[mxDebit] becomes 0
 	minCashFlowRec(amount,friendsArray,N);
+  optarray.push(obj);
+
 }
 
 // Given a set of persons as graph where graph[i][j] indicates the amount that person i needs to 
@@ -520,6 +540,7 @@ function minCashFlowRec(amount,friendsArray,N)
 function minCashFlow(graph,friendsArray,N)
 {
 	// Create an array amount, initialize all value in it as 0.
+  optarray = []
 	let amount=Array.from({length: N}, (_, i) => 0);
 
 	// Calculate the net amount to be paid to person 'p', and stores it in amount[p]. 
@@ -527,6 +548,6 @@ function minCashFlow(graph,friendsArray,N)
 	for (p = 0; p < N; p++)
 	for (i = 0; i < N; i++)
 		amount[p] += (graph[i][p] - graph[p][i]);
-
+  console.log(amount);
 	minCashFlowRec(amount,friendsArray,N);
 }

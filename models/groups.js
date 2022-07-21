@@ -5,15 +5,12 @@ const groupSchema = new mongoose.Schema({
         type: String,
         unique: true    
     },
+    username:String,
     transaction : [{
         person: String,
         amount: Number
     }],
-    optimizeTransactions : [{
-        sender: String,
-        receiver: String,
-        amount: Number
-    }],
+    optimizeTransactions : [],
     personUsername : []
 });
 
