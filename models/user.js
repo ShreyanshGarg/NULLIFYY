@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
       amount: Number,
     },
   ],
+  groupsId: []
 });
 
 userSchema.plugin(passportLocalMongoose);

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require("passport-local-mongoose");
 const groupSchema = new mongoose.Schema({
-    groupName: {
+    groupId: {
         type: String,
         unique: true    
     },
