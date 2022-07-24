@@ -101,6 +101,43 @@ app.get("/logout", function (req, res) {
   res.redirect("/");
 });
 
+app.get("/group/user", async function(req,res){
+  if (req.isAuthenticated()) {
+    try{
+      var context = req.cookies["context"];
+      res.clearCookie("context", {
+        httpOnly: true,
+      });
+      let grp = await Group.findOne(
+        {
+          groupId:`${req.query.topic}`
+        }).exec();
+      //  console.log(grp)
+      res.render("group",{
+        firstname: req.user.firstName,
+        lastname: req.user.lastName,
+        groupName:grp.groupId,
+        userName:req.user.username,
+        optimizeTransactions:grp.optimizeTransactions,
+        friendList: req.user.friends,
+        groupList: req.user.groupsId,
+        error_msg: context,
+        transaction:grp.transaction,
+        transactionList: req.user.transactions,
+      })
+
+      }
+    catch (error) {
+      console.log(error);}
+
+  }else{
+    res.render("login", {
+      danger: "none",
+    });
+
+  }
+})
+
 // ***********Signup request***************
 app.post("/register", function (req, res) {
   User.findOne(
@@ -218,7 +255,6 @@ app.post("/expCalc", async function (req, res) {
       friends_array = frnd_string.split(","); 
       friends_array.unshift(req.user.username);
 
-      console.log(friends_array)
       for (let i = 0; i < amount_array.length; i++) {
         amount_array[i] = new Array(friend_counter);
       }

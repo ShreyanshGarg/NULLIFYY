@@ -1,0 +1,120 @@
+<%- include('partials/header') %>
+
+
+<!-- section for navbar -->
+<%- include('navBar') %>
+
+<%- include('leftSideBar') %>
+
+<!-- section for center part -->
+<div class="col-lg-8 col-sm-8 center">
+    <div class="top">
+      <div class="topbar">
+        <% let grpName = groupName.split("-`-"); %>
+        <h1 class="dash"><%=grpName[0] %></h1>
+        <div class="actions">
+          <Button id="exp-btn" class="button-exp btn btn-md btn-danger" onclick="expense()">Add an expense</Button>
+          <Button class="button-settle btn btn-md btn-success" onclick="settle()">Settle up</Button>
+        </div>
+      </div>
+
+      <div class="total-info">
+        <div class="container">
+          <div class="row">
+            <div class="col" >
+              you owe
+              <br />
+              <% var oweAmt = 0.00; %>
+              <% var owedAmt = 0.00; %>
+              <% var total = 0.00; %>
+              <% var total_valColor = 'green' %>
+              <% optimizeTransactions.forEach(friend => { %>
+                <% if(friend.sender === userName) { %>
+                  <% oweAmt+=(friend.amount*-1);
+                } %>
+                <% if(friend.receiver === userName) { %>
+                  <% owedAmt+=friend.amount; } %>
+                  
+                  
+                <% total = parseFloat(owedAmt + oweAmt).toFixed(2); %>
+              <% }) %>
+              <% oweAmt = parseFloat(oweAmt).toFixed(2); %>
+              <% owedAmt = parseFloat(owedAmt).toFixed(2); %>
+              <% if(oweAmt==0) { %>
+              <div style="color:black" class="owe-amt">₹ <%=oweAmt%></div>
+              <% } else { %>
+              <div class="owe-amt">₹ <%=oweAmt%></div>
+              <% } %>
+            </div>
+            <div class="col mid-col">
+              total balance
+              <br />
+              <%  if(total<0){ %>
+              <div style="color:red;font-weight:500">₹ <%=total%></div>
+              <% }else if(total>0){%>
+              <div style="color:green;font-weight:500">₹ <%=total%></div>
+              <% } else { %>
+              <div style="font-weight:500">₹ <%=total%></div>
+              <% } %>
+            </div>
+            <div class="col">
+              you are owed
+              <br />
+              <% if(owedAmt==0) { %>
+              <div style="color:black" class="owed-amt">₹ <%=owedAmt%></div>
+              <% } else { %>
+              <div class="owed-amt">₹ <%=owedAmt%> </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="all-info">
+        <div class="all-info-heading row">
+          <div class="col you-owe">
+            <h4>Transactions</h4>
+          </div>
+          <div class="col you-are-owed">
+            <h4>Optimized Transactions</h4>
+          </div>
+        </div>
+        <div class="row list">
+          <div class="col negative-col">
+            <div class="negatives">
+              <ul class="list-style-remover">
+                <% transaction.forEach(transac => { %>
+     
+                    <li class="list-item">
+                      <img class="list-img" alt="img" src=\images\frnd.png />
+                      <div class="list-name"><%=transac.person%></div>
+                      <div class="negative-amt">Amount -  ₹<%=parseFloat(transac.amount).toFixed(2)%></div>
+                    </li>
+
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+          <div class="col positive-col" >
+            <div class="positives">
+              <ul class="list-style-remover">
+                <% optimizeTransactions.forEach(friend => { %>
+              
+                    <li class="list-item">
+                      <img class="list-img" alt="img" src=\images\frnd.png />
+                      <div class="list-name"><%=friend.sender%> <span style="font-weight:300">needs to pay</span> <%=friend.receiver%></div>
+                      <div class="positive-amt">Amount - ₹<%=parseFloat(friend.amount).toFixed(2)%></div>
+                    </li>
+            
+                <% }) %>
+              </ul>
+            </div>
+          </div>
+        </div>
+<!-- ------------------------------------------- -->
+      </div>
+    </div>
+  </div>
+
+  <%- include('rightSideBar') %>
+  <%- include('partials/footer') %>

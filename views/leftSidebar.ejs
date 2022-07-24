@@ -18,7 +18,7 @@
           <ul class="unordered-list">
             <% groupList.forEach((groupId) => { %>
               <% let groupName = groupId.split("-`-"); %>
-              <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png /><a href=<%= groupId %> style="color:black; text-decoration:none"><%= groupName[0] %></a></li>
+              <li class="grouplist"><img class="frnd_grp_img" alt="img" src=\images\grp.png /><a href=/group/user?topic=<%= groupId %> style="color:black; text-decoration:none"><%= groupName[0] %></a></li>
             <% }); %>
           </ul>
         </div>
@@ -31,7 +31,7 @@
           </div>
           <ul class="unordered-list">
             <% friendList.forEach((friend) => { %>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend.name %></li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=\images\frnd.png /><%= friend.name %></li>
             <% }); %>
           </ul>
         </div>
