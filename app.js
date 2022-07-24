@@ -3,11 +3,14 @@ const bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
+const { v4:uuidv4} = require("uuid");
 require("./db/db_connection");
 const User = require("./models/user.js");
+const Group = require("./models/groups.js");
 const app = express();
 
 var m = false;
+let optarray = [];
 
 app.use(express.static("public"));
 app.set("view engine", "ejs");
@@ -79,6 +82,7 @@ app.get("/dashboard", function (req, res) {
       firstname: req.user.firstName,
       lastname: req.user.lastName,
       friendList: req.user.friends,
+      groupList: req.user.groupsId,
       error_msg: context,
       username: req.user.username,
       transactionList: req.user.transactions,
@@ -96,6 +100,43 @@ app.get("/logout", function (req, res) {
   // console.log("logged out");
   res.redirect("/");
 });
+
+app.get("/group/user", async function(req,res){
+  if (req.isAuthenticated()) {
+    try{
+      var context = req.cookies["context"];
+      res.clearCookie("context", {
+        httpOnly: true,
+      });
+      let grp = await Group.findOne(
+        {
+          groupId:`${req.query.topic}`
+        }).exec();
+      //  console.log(grp)
+      res.render("group",{
+        firstname: req.user.firstName,
+        lastname: req.user.lastName,
+        groupName:grp.groupId,
+        userName:req.user.username,
+        optimizeTransactions:grp.optimizeTransactions,
+        friendList: req.user.friends,
+        groupList: req.user.groupsId,
+        error_msg: context,
+        transaction:grp.transaction,
+        transactionList: req.user.transactions,
+      })
+
+      }
+    catch (error) {
+      console.log(error);}
+
+  }else{
+    res.render("login", {
+      danger: "none",
+    });
+
+  }
+})
 
 // ***********Signup request***************
 app.post("/register", function (req, res) {
@@ -214,7 +255,6 @@ app.post("/expCalc", async function (req, res) {
       friends_array = frnd_string.split(","); 
       friends_array.unshift(req.user.username);
 
-      console.log(friends_array)
       for (let i = 0; i < amount_array.length; i++) {
         amount_array[i] = new Array(friend_counter);
       }
@@ -247,9 +287,39 @@ app.post("/expCalc", async function (req, res) {
           amount_array[i][j] = amount_array[i][j].toFixed(2) * 1;
         }
       }
-      console.log(amount_array);
+      // console.log(amount_array);
+
+      let amount_paid = [];
+      for(let i in friends_array){
+        let person = friends_array[i];
+        let amount = friend_map[i];
+        let obj = {
+          person,
+          amount
+        };
+        amount_paid.push(obj);
+
+      }
       minCashFlow(amount_array,friends_array,friend_counter);
+      const gid = req.body.groupName + "-`-" + uuidv4();
+      for(let username of friends_array) {
+        await User.findOneAndUpdate({username: username},
+          {"$push": {"groupsId": gid}},
+          {"new": true, "upsert": true}, 
+        )
+      }
+      const grpInstance = new Group({
+        groupId:gid, 
+        personUsername:friends_array , 
+        username:req.user.username,
+        optimizeTransactions : optarray,
+        transaction:amount_paid
+      });
+
+      await grpInstance.save();
+
       //console.log("group condition encountered");
+      console.log(optarray);
     }
     res.redirect("/dashboard");
   } else {
@@ -449,9 +519,6 @@ app.listen(process.env.PORT, function () {
 
 /*----------Find Maximum Cash Flow among a set of persons------*/
 
-// Number of persons (or vertices in the graph)
-// let N = 3;
-
 // A utility function that returns index of minimum value in arr
 function getMin(arr,N)
 {
@@ -479,8 +546,6 @@ function minOf2(x , y)
 }
 
 // amount[p] indicates the net amount to be credited/debited to/from person 'p'
-// If amount[p] is positive, then i'th person will amount[i]
-// If amount[p] is negative, then i'th person will give -amount[i]
 function minCashFlowRec(amount,friendsArray,N)
 {
 	// Find the indexes of minimum and maximum values in amount
@@ -505,12 +570,14 @@ function minCashFlowRec(amount,friendsArray,N)
     amount: min
   }
 	//console.log(friendsArray[mxDebit] + " has to pay " + min + " to " + friendsArray[mxCredit] + "\n");
-  console.log(obj);
+  // console.log(obj);
 
 	// Recur for the amount array.
 	// Note that it is guaranteed that the recursion would terminate as either amount[mxCredit] or
 	// amount[mxDebit] becomes 0
 	minCashFlowRec(amount,friendsArray,N);
+  optarray.push(obj);
+
 }
 
 // Given a set of persons as graph where graph[i][j] indicates the amount that person i needs to 
@@ -518,6 +585,7 @@ function minCashFlowRec(amount,friendsArray,N)
 function minCashFlow(graph,friendsArray,N)
 {
 	// Create an array amount, initialize all value in it as 0.
+  optarray = []
 	let amount=Array.from({length: N}, (_, i) => 0);
 
 	// Calculate the net amount to be paid to person 'p', and stores it in amount[p]. 
@@ -525,6 +593,6 @@ function minCashFlow(graph,friendsArray,N)
 	for (p = 0; p < N; p++)
 	for (i = 0; i < N; i++)
 		amount[p] += (graph[i][p] - graph[p][i]);
-
+  console.log(amount);
 	minCashFlowRec(amount,friendsArray,N);
 }

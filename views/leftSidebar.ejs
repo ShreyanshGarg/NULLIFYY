@@ -16,13 +16,10 @@
             <button class="add-button"> + Add</button>
           </div>
           <ul class="unordered-list">
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 1</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 2</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 3</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 4</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 5</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 6</li>
-            <li class="grouplist"><img class="frnd_grp_img" alt="img" src=images\grp.png />Group 7</li>
+            <% groupList.forEach((groupId) => { %>
+              <% let groupName = groupId.split("-`-"); %>
+              <li class="grouplist"><img class="frnd_grp_img" alt="img" src=\images\grp.png /><a href=/group/user?topic=<%= groupId %> style="color:black; text-decoration:none"><%= groupName[0] %></a></li>
+            <% }); %>
           </ul>
         </div>
         <div class="friends">
@@ -34,7 +31,7 @@
           </div>
           <ul class="unordered-list">
             <% friendList.forEach((friend) => { %>
-            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=images\frnd.png /><%= friend.name %></li>
+            <li class="friendlist"><img class="frnd_grp_img" alt="img" src=\images\frnd.png /><%= friend.name %></li>
             <% }); %>
           </ul>
         </div>
