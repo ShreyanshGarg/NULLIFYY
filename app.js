@@ -5,6 +5,7 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const { v4:uuidv4} = require("uuid");
 require("./db/db_connection");
+require('dotenv').config({path:'config/dev.env'});
 const User = require("./models/user.js");
 const Group = require("./models/groups.js");
 const app = express();
